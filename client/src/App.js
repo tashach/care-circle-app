@@ -13,7 +13,8 @@ import "@fontsource/roboto/700.css";
 function App() {
   const [userData, setUserData] = useState([]);
 
-  const URL = "http://localhost:5000/api/user";
+  // const URL = "http://localhost:5000/api/user";
+  const URL = "https://care-circle-app.herokuapp.com/user";
 
   const USER_ID = "63d013fc80b92d424dd68e23";
 
