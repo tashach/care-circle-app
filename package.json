@@ -13,7 +13,7 @@
     "heroku-postbuild": "npm run install-client && npm run build",
     "server": "nodemon server.js",
     "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
+    "start": "nodemon server.js",
     "dev": "nodemon server.js"
   },
   "repository": {
@@ -21,7 +21,7 @@
     "url": "git+https://github.com/tashach/care-circle-app.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Tasha Chang",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tashach/care-circle-app/issues"

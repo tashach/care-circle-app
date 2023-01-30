@@ -50,6 +50,21 @@ exports.deleteUser = (req, res) => {
     );
 };
 
+exports.getTask = (req, res) => {
+  User.findById(req.params.id)
+    .then((user) => res.json(user.tasks))
+    .catch((err) =>
+      res.status(404).json({ message: "User not found", error: err.message })
+    );
+};
+
+exports.getCircle = (req, res) => {
+  User.findById(req.params.id)
+    .then((user) => res.json(user.circle))
+    .catch((err) =>
+      res.status(404).json({ message: "User not found", error: err.message })
+    );
+};
 // ---------------------------- Task Routes --------------------- //
 exports.addTask = (req, res) => {
   const newTask = new Task(req.body);

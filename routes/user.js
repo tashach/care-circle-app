@@ -8,6 +8,8 @@ const {
   postCreateUser,
   putUpdateUser,
   deleteUser,
+  getTask,
+  getCircle,
   addTask,
   deleteTask,
   updateTask,
@@ -50,7 +52,20 @@ router.put("/:id", putUpdateUser);
  * @access public
  */
 router.delete("/:id", deleteUser);
-// router.delete("/", deleteUser);
+
+/**
+ * @route GET /user/:id/task
+ * @description get tasks for one user
+ * @access public
+ */
+router.get("/:id/task", getTask);
+
+/**
+ * @route GET /user/:id/member
+ * @description get members for one user
+ * @access public
+ */
+router.get("/:id/circle", getCircle);
 
 /**
  * @route POST /task/:id
