@@ -5,16 +5,22 @@ import TaskList from "./components/TaskList";
 import MemberList from "./components/MemberList";
 import NewTaskForm from "./components/NewTaskForm";
 import NewMemberForm from "./components/NewMemberForm";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import LandingPage from "./screens/LandingPage";
+import Dashboard from "./screens/Dashboard";
+import { BrowserRouter, Route } from "react-router-dom";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import Task from "./components/Task";
 
 function App() {
   const [userData, setUserData] = useState([]);
 
-  const URL = "http://localhost:5000/api/user";
-  // const URL = "https://care-circle-app.herokuapp.com/api/user";
+  // const URL = "http://localhost:5000/api/user";
+  const URL = "https://care-circle-app.herokuapp.com/api/user";
 
   const USER_ID = "63d013fc80b92d424dd68e23";
 
@@ -158,9 +164,11 @@ function App() {
   };
   // ------------------------- Rendering ---------------------- //
   return (
-    <div className="">
-      <header className="">Care Circle</header>
+    <BrowserRouter>
+      <Header />
       <main>
+        {/* <Route exact path="/" component={() => <LandingPage />} />
+        <Route exact path="/dashboard" component={() => <Dashboard />} /> */}
         <h1>Welcome, {userData.firstName}!</h1>
         <div id="mainContainer">
           <div id="leftContainer">
@@ -183,7 +191,8 @@ function App() {
           </div>
         </div>
       </main>
-    </div>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
