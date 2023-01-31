@@ -21,20 +21,20 @@ app.use("/api/user", user);
 const PORT = process.env.PORT || 5000;
 
 //----------deployment-------------//
-// __dirname = path.resolve();
+__dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
+  console.log(`current directory: ${__dirname}`);
   app.use(express.static(path.join(__dirname, "/client/build")));
-  // app.get("*", (req, res) => {
-  //   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  // });
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  // });
 } else {
   app.get("/", (req, res) => res.send("Server up and running"));
 }
 
 app.listen(PORT, () => {
   console.log(`server is running on http://localhost:${PORT}`);
-  console.log(`current directory: ${__dirname}`);
 });
