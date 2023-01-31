@@ -165,7 +165,7 @@ function App() {
   // ------------------------- Rendering ---------------------- //
   return (
     <BrowserRouter>
-      <Header />
+      {/* <Header /> */}
       <main>
         {/* <Route exact path="/" component={() => <LandingPage />} />
         <Route exact path="/dashboard" component={() => <Dashboard />} /> */}
