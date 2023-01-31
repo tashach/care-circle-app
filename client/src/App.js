@@ -6,7 +6,7 @@ import MemberList from "./components/MemberList";
 import NewTaskForm from "./components/NewTaskForm";
 import NewMemberForm from "./components/NewMemberForm";
 // import Header from "./components/Header";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import LandingPage from "./screens/LandingPage";
 import Dashboard from "./screens/Dashboard";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -191,7 +191,7 @@ function App() {
           </div>
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
