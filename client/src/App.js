@@ -7,9 +7,9 @@ import NewTaskForm from "./components/NewTaskForm";
 import NewMemberForm from "./components/NewMemberForm";
 // import Header from "./components/Header";
 // import Footer from "./components/Footer";
-import LandingPage from "./screens/LandingPage";
-import Dashboard from "./screens/Dashboard";
-import { BrowserRouter, Route } from "react-router-dom";
+// import LandingPage from "./screens/LandingPage";
+// import Dashboard from "./screens/Dashboard";
+// import { BrowserRouter, Route } from "react-router-dom";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -164,7 +164,7 @@ function App() {
   };
   // ------------------------- Rendering ---------------------- //
   return (
-    <BrowserRouter>
+    <div>
       {/* <Header /> */}
       <main>
         {/* <Route exact path="/" component={() => <LandingPage />} />
@@ -192,7 +192,7 @@ function App() {
         </div>
       </main>
       {/* <Footer /> */}
-    </BrowserRouter>
+    </div>
   );
 }
 
