@@ -33,4 +33,5 @@ if (process.env.NODE_ENV === "production") {
 
 app.listen(PORT, () => {
   console.log(`server is running on http://localhost:${PORT}`);
+  console.log(`current directory: ${__dirname}`);
 });
