@@ -1,60 +1,21 @@
 import PropTypes from "prop-types";
 import Mainscreen from "../components/Mainscreen.js";
 import { Button, Card, Badge } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import taskData from "../App";
+import { Link, taskData } from "react-router-dom";
+import TaskList from "../components/TaskList.js";
+import Header from "../components/Header";
+// import taskData from "../App";
 
-const Dashboard = ({ deleteTask, editTask }) => {
-  console.log(taskData);
-  taskData = JSON.parse(taskData);
-
-  // {taskData.map((task) => (
-  //     <Card key={task._id} style={{ margin: 10 }}>
-  //       <Card.Header style={{ display: "flex" }}>
-  //         <span
-  //           style={{
-  //             color: "black",
-  //             textDecoration: "none",
-  //             flex: 1,
-  //             cursor: "pointer",
-  //             alignSelf: "center",
-  //             fontSize: 18,
-  //           }}
-  //         >
-  //           {task.title}
-  //         </span>
-  //         <div>
-  //           <Button onClick={() => editTask()}>Edit</Button>
-  //           <Button
-  //             variant="danger"
-  //             onClick={() => {
-  //               deleteTask();
-  //             }}
-  //           >
-  //             Delete
-  //           </Button>
-  //         </div>
-  //       </Card.Header>
-  //       <Card.Body>
-  //         <h4>
-  //           <Badge bg="success">{task.volunteerName}</Badge>
-  //         </h4>
-  //         <blockquote className="blockquote mb-0">
-  //           <p>{task.description}</p>
-  //           <footer className="blockquote-footer">Created on</footer>
-  //         </blockquote>
-  //       </Card.Body>
-  //     </Card>
-  //   );)};
-
+const Dashboard = () => {
   return (
-    <Mainscreen title="Welcome Back Tasha">
-      <Link to="addtask">
-        <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
-          Add New Task
-        </Button>
-      </Link>
-      {taskData.forEach((task) => (
+    <>
+      <Header />
+      <Mainscreen title="Welcome Back Tasha">
+        <Link to="addtask">
+          <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
+            Add New Task
+          </Button>
+        </Link>
         <Card style={{ margin: 10 }}>
           <Card.Header style={{ display: "flex" }}>
             <span
@@ -67,19 +28,12 @@ const Dashboard = ({ deleteTask, editTask }) => {
                 fontSize: 18,
               }}
             >
-              {task.title}
+              Title
             </span>
 
             <div>
-              <Button onClick={() => editTask()}>Edit</Button>
-              <Button
-                variant="danger"
-                onClick={() => {
-                  deleteTask();
-                }}
-              >
-                Delete
-              </Button>
+              <Button>Edit</Button>
+              <Button variant="danger">Delete</Button>
             </div>
           </Card.Header>
 
@@ -93,8 +47,8 @@ const Dashboard = ({ deleteTask, editTask }) => {
             </blockquote>
           </Card.Body>
         </Card>
-      ))}
-    </Mainscreen>
+      </Mainscreen>
+    </>
   );
 };
 
