@@ -17,7 +17,7 @@ app.use(express.json({ extended: false }));
 app.use(function (req, res, next) {
   res.setHeader(
     "Content-Security-Policy-Report-Only",
-    "default-src 'self';, font-src 'self'@fontsource/roboto/300.css @fontsource/roboto/400.css @fontsource/roboto/500.css @fontsource/roboto/700.css; img-src 'self'; script-src 'self';, style-src 'self', frame-src 'self'"
+    "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' @fontsource/roboto/300.css @fontsource/roboto/400.css @fontsource/roboto/500.css @fontsource/roboto/700.css; frame-src 'self';"
   );
   next();
 });
