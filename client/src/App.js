@@ -15,6 +15,7 @@ function App() {
 
   // const URL = "http://localhost:5000/api/user";
   const URL = "https://care-circle-app.herokuapp.com/api/user";
+  // const URL = "/api/user";
 
   const USER_ID = "63d013fc80b92d424dd68e23";
 
