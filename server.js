@@ -17,7 +17,7 @@ app.use(express.json({ extended: false }));
 app.use(function (req, res, next) {
   res.setHeader(
     "Content-Security-Policy-Report-Only",
-    "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-hashes'; style-src 'self' 'unsafe-inline'; frame-src 'self'; connect-src 'self';"
+    "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-src 'self'; connect-src 'self';"
   );
   next();
 });
