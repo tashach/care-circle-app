@@ -22,18 +22,7 @@ exports.getOneUser = (req, res) => {
     );
 };
 
-// exports.postCreateUser = (req, res) => {
-//   User.create(req.body)
-//     .then((data) => res.json({ message: "User added successfully", data }))
-//     .catch((err) =>
-//       res
-//         .status(400)
-//         .json({ message: "Failed to add user", error: err.message })
-//     );
-// };
-
 exports.postCreateUser = asyncHandler(async (req, res) => {
-  // const { firstName, lastName, email, password } = req.body;
   const userExists = await User.findOne({ email: req.body.email });
 
   if (userExists) {
