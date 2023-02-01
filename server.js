@@ -19,6 +19,10 @@ app.use(function (req, res, next) {
     "Content-Security-Policy-Report-Only",
     "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-src 'self'; connect-src 'self';"
   );
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://care-circle-app.herokuapp.com"
+  );
   next();
 });
 app.use("/api/user", user);
