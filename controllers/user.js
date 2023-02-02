@@ -46,6 +46,17 @@ exports.postCreateUser = asyncHandler(async (req, res) => {
   }
 });
 
+exports.login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email: email });
+  if (user && (await user.matchPassword(password))) {
+    res.json(user);
+  } else {
+    res.status(400).json({ message: "Invalid email or password" });
+    throw new Error("Invalid email or password");
+  }
+});
+
 exports.putUpdateUser = (req, res) => {
   User.findByIdAndUpdate(req.params.id, req.body)
     .then((data) => res.json({ message: "updated successfully", data }))

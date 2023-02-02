@@ -5,6 +5,7 @@ const router = express.Router();
 const {
   getAllUsers,
   getOneUser,
+  login,
   postCreateUser,
   putUpdateUser,
   deleteUser,
@@ -25,10 +26,17 @@ router.get("/", getAllUsers);
 
 /**
  * @route GET /user/:id
- * @description get one user
+ * @description getOneUser
  * @access public
  */
 router.get("/:id", getOneUser);
+
+/**
+ * @route POST /user/login
+ * @description login
+ * @access public
+ */
+router.post("/login", login);
 
 /**
  * @route POST /user
