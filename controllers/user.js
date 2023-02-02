@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const Task = require("../models/task");
 const Member = require("../models/member");
+const asyncHandler = require("express-async-handler");
 
 const { rawListeners, db } = require("../models/user");
 var ObjectId = require("mongodb").ObjectId;
@@ -21,15 +22,40 @@ exports.getOneUser = (req, res) => {
     );
 };
 
-exports.postCreateUser = (req, res) => {
-  User.create(req.body)
-    .then((data) => res.json({ message: "User added successfully", data }))
-    .catch((err) =>
-      res
-        .status(400)
-        .json({ message: "Failed to add user", error: err.message })
-    );
-};
+exports.postCreateUser = asyncHandler(async (req, res) => {
+  const userExists = await User.findOne({ email: req.body.email });
+
+  if (userExists) {
+    res.status(400).json({ message: "User Already Exists" });
+    throw new Error("User Already Exists");
+  }
+  const user = await User.create(req.body);
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      password: user.password,
+      circle: [],
+      tasks: [],
+      inviteCode: "",
+    });
+  } else {
+    res.status(400);
+    throw new Error("Failed to create User");
+  }
+});
+
+exports.login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email: email });
+  if (user && (await user.matchPassword(password))) {
+    res.json(user);
+  } else {
+    res.status(400).json({ message: "Invalid email or password" });
+    throw new Error("Invalid email or password");
+  }
+});
 
 exports.putUpdateUser = (req, res) => {
   User.findByIdAndUpdate(req.params.id, req.body)
