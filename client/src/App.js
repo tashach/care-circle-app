@@ -15,7 +15,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import LandingPage from "./components/pages/LandingPage";
 import MyTasks from "./components/pages/MyTasks";
-import Login from "./components/pages/Login";
+import LoginPage from "./components/pages/LoginPage";
 
 function App() {
   const [userData, setUserData] = useState([]);
@@ -172,7 +172,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<LandingPage />} exact />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route
             path="/mytasks"
             element={<MyTasks taskData={userData.tasks} />}
