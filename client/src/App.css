@@ -1,32 +1,3 @@
 main {
     min-height: 90vh;
 }
-
-  #mainContainer {
-      display: flex;
-      flex-direction: row;
-  }
-
-  #leftContainer {
-      display: flex;
-      flex-direction: column;
-      padding: 3rem;
-  }
-
-  h1 {
-      padding-left: 2rem;
-  }
-
-  h2 {
-      padding-left: 1rem;
-  }
-  #rightContainer {
-      display: flex;
-      flex-direction: column;
-      padding: 3rem;
-  }
-
-  ul{
-      padding: 0;
-  }
-
