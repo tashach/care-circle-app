@@ -1,10 +1,14 @@
 import "./App.css";
+import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import TaskList from "./components/TaskList";
 import MemberList from "./components/MemberList";
 import NewTaskForm from "./components/NewTaskForm";
 import NewMemberForm from "./components/NewMemberForm";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { BrowserRouter } from "react-router-dom";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -158,6 +162,38 @@ function App() {
       });
   };
   // ------------------------- Rendering ---------------------- //
+
+  //   return (
+  //     <div className="">
+  //       <Header />
+  //       <main>
+  //         <h1>Welcome, {userData.firstName}!</h1>
+  //         <div id="mainContainer">
+  //           <div id="leftContainer">
+  //             <h2>Upcoming Tasks</h2>
+  //             <NewTaskForm addTask={addTask} id="newTaskForm" />
+  //             <TaskList
+  //               taskData={userData.tasks}
+  //               deleteTask={deleteTask}
+  //               editTask={editTask}
+  //             />
+  //           </div>
+  //           <div id="rightContainer">
+  //             <h2>My Circle</h2>
+  //             <NewMemberForm addMember={addMember} />
+  //             <MemberList
+  //               memberData={userData.circle}
+  //               deleteMember={deleteMember}
+  //               editMember={editMember}
+  //             />
+  //           </div>
+  //         </div>
+  //       </main>
+  //       <Footer />
+  //     </div>
+  //   );
+  // }
+
   return (
     <div className="">
       <header className="">Care Circle</header>
