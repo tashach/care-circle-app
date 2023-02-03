@@ -8,12 +8,13 @@ import NewTaskForm from "./components/NewTaskForm";
 import NewMemberForm from "./components/NewMemberForm";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import LandingPage from "./components/pages/LandingPage";
+import MyTasks from "./components/pages/MyTasks";
 
 function App() {
   const [userData, setUserData] = useState([]);
@@ -165,13 +166,19 @@ function App() {
   // ------------------------- Rendering ---------------------- //
 
   return (
-    <div className="">
+    <BrowserRouter>
       <Header />
       <main>
-        <LandingPage></LandingPage>
+        <Routes>
+          <Route path="/" element={<LandingPage />} exact />
+          <Route
+            path="/mytasks"
+            element={<MyTasks taskData={userData.tasks} />}
+          />
+        </Routes>
       </main>
       <Footer />
-    </div>
+    </BrowserRouter>
   );
 }
 
