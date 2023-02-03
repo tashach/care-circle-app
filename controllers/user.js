@@ -52,8 +52,8 @@ exports.login = asyncHandler(async (req, res) => {
   if (user && (await user.matchPassword(password))) {
     res.json(user);
   } else {
-    res.status(400).json({ message: "Invalid email or password" });
-    throw new Error("Invalid email or password");
+    res.status(400).json({ message: "Incorrect email or password" });
+    throw new Error("Incorrect email or password");
   }
 });
 
