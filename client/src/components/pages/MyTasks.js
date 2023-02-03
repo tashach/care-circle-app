@@ -35,7 +35,7 @@ const MyTasks = ({ taskData, deleteTask, editTask }) => {
           Add New Task
         </Button>
       </Link>
-      <ul>{taskComponents}</ul>
+      {taskComponents}
     </Mainscreen>
   );
 };
