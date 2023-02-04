@@ -60,14 +60,17 @@ const Task = ({
   return (
     <Card style={{ margin: 10 }}>
       <Card.Header style={{ display: "flex" }}>
-        <div class="form-check">
+        <div className="form-check">
           <input
-            class="form-check-input"
+            className="form-check-input"
             type="checkbox"
             value=""
             id="flexCheckDefault"
           />
-          <label class="form-check-label" for="flexCheckDefault"></label>
+          <label
+            className="form-check-label"
+            htmlFor="flexCheckDefault"
+          ></label>
         </div>
         <span
           style={{
@@ -115,11 +118,11 @@ const Task = ({
 
 export default Task;
 
-Task.propTypes = {
-  _id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  volunteerName: PropTypes.string,
-  isComplete: PropTypes.bool.isRequired,
-  deleteTask: PropTypes.func.isRequired,
-};
+// Task.propTypes = {
+//   _id: PropTypes.string.isRequired,
+//   title: PropTypes.string.isRequired,
+//   description: PropTypes.string,
+//   volunteerName: PropTypes.string,
+//   isComplete: PropTypes.bool.isRequired,
+//   deleteTask: PropTypes.func.isRequired,
+// };

@@ -16,22 +16,45 @@ import "@fontsource/roboto/700.css";
 import LandingPage from "./components/pages/LandingPage";
 import MyTasks from "./components/pages/MyTasks";
 import LoginPage from "./components/pages/LoginPage";
+import SignUpPage from "./components/pages/SignUpPage";
 
 function App() {
   const [userData, setUserData] = useState([]);
+  // const [USER_ID, setUserId] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [taskData, setTaskData] = useState([]);
 
-  // const URL = "http://localhost:5000/api/user";
-  // const URL = "https://care-circle-app.herokuapp.com/api/user";
+  useEffect(() => {
+    console.log("updating task data");
+    setTaskData(userData.tasks);
+  }, [userData]);
+
   const URL = "/api/user";
 
   const USER_ID = "63d013fc80b92d424dd68e23";
+
+  const loginUser = (email, password, config) => {
+    console.log("calling LoginUser with", email, password);
+    axios
+      .post(`${URL}/login`, { email: email, password: password }, config)
+      .then((response) => {
+        const userAPICopy = { ...response.data };
+        console.log("Calling API", userAPICopy);
+        setUserData(userAPICopy);
+        // setUserId(response.data._id);
+        setLoggedIn(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const fetchUserData = () => {
     axios
       .get(`${URL}/${USER_ID}`)
       .then((response) => {
         const userAPICopy = { ...response.data };
-        console.log("Calling API");
+        console.log("Calling API", USER_ID);
         setUserData(userAPICopy);
       })
       .catch((error) => {
@@ -164,6 +187,7 @@ function App() {
         console.log(error);
       });
   };
+
   // ------------------------- Rendering ---------------------- //
 
   return (
@@ -172,10 +196,17 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<LandingPage />} exact />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage loginUser={loginUser} />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route
             path="/mytasks"
-            element={<MyTasks taskData={userData.tasks} />}
+            element={
+              <MyTasks
+                taskData={taskData}
+                deleteTask={deleteTask}
+                addTask={addTask}
+              />
+            }
           />
         </Routes>
       </main>
@@ -185,34 +216,3 @@ function App() {
 }
 
 export default App;
-//   return (
-//     <div className="">
-//       <header className="">Care Circle</header>
-//       <main>
-//         <h1>Welcome, {userData.firstName}!</h1>
-//         <div id="mainContainer">
-//           <div id="leftContainer">
-//             <h2>Upcoming Tasks</h2>
-//             <NewTaskForm addTask={addTask} id="newTaskForm" />
-//             <TaskList
-//               taskData={userData.tasks}
-//               deleteTask={deleteTask}
-//               editTask={editTask}
-//             />
-//           </div>
-//           <div id="rightContainer">
-//             <h2>My Circle</h2>
-//             <NewMemberForm addMember={addMember} />
-//             <MemberList
-//               memberData={userData.circle}
-//               deleteMember={deleteMember}
-//               editMember={editMember}
-//             />
-//           </div>
-//         </div>
-//       </main>
-//     </div>
-//   );
-// }
-
-// export default App;

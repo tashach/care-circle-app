@@ -22,9 +22,8 @@ const MyTasks = ({ taskData, deleteTask, editTask }) => {
       </li>
     );
   });
-
   return (
-    <Mainscreen title="Welcome Back Tasha">
+    <Mainscreen title="Welcome Back">
       <Link to="addTask">
         <Button
           variant="info"

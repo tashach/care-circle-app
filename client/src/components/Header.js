@@ -6,23 +6,17 @@ const Header = () => {
   return (
     <Navbar bg="primary" expand="lg">
       <Container>
-        <Navbar.Brand>
-          <Link className="navLink homeLink" to="/">
-            Care Circle
-          </Link>
+        <Navbar.Brand className="navLink homeLink" href="/">
+          Care Circle
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="m-auto">
-            <Nav.Link>
-              <Link className="navLink" to="/mytasks">
-                Tasks
-              </Link>
+            <Nav.Link className="navLink" href="/mytasks">
+              Tasks
             </Nav.Link>
-            <Nav.Link href="#link">
-              <Link className="navLink" to="">
-                My Circle
-              </Link>
+            <Nav.Link className="navLink" href="">
+              My Circle
             </Nav.Link>
             <NavDropdown title="<User Name>" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
