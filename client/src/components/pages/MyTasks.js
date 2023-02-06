@@ -1,12 +1,12 @@
 import Mainscreen from "../Mainscreen";
 import "../styles/Mainscreen.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Task from "../Task";
-import PropTypes from "prop-types";
 import "../styles/TaskList.css";
+const MyTasks = ({ deleteTask, editTask, taskData, userName }) => {
+  console.log(taskData);
 
-const MyTasks = ({ taskData, deleteTask, editTask }) => {
   const taskComponents = taskData?.map((task) => {
     return (
       <li key={task._id}>
@@ -22,9 +22,8 @@ const MyTasks = ({ taskData, deleteTask, editTask }) => {
       </li>
     );
   });
-
   return (
-    <Mainscreen title="Welcome Back Tasha">
+    <Mainscreen title={`Welcome Back ${userName}`}>
       <Link to="addTask">
         <Button
           variant="info"
@@ -32,7 +31,7 @@ const MyTasks = ({ taskData, deleteTask, editTask }) => {
           size="lg"
           style={{ marginLeft: 10, marginBottom: 6 }}
         >
-          Add New Task
+          + Add New Task
         </Button>
       </Link>
       {taskComponents}

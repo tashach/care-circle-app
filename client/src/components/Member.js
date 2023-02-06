@@ -1,11 +1,8 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import "./styles/Member.css";
+import { Button, Card } from "react-bootstrap";
 
 const Member = ({
   _id,
@@ -52,97 +49,46 @@ const Member = ({
   };
 
   return (
-    <div className="member-container">
-      <div className="upper-container">
-        <div className="title-description" key={_id}>
-          <h3>
-            {firstName} {lastName}
-          </h3>
-          <p>
-            {email} {phone}
-          </p>
-        </div>
-
-        <div className="button-container">
-          <button
-            className="edit-button"
-            onClick={() => setIsHidden(!isHidden)}
-          >
-            Edit Info
-          </button>
-        </div>
-      </div>
-
-      <div className={`lower-container, ${displayClass}`}>
-        <h3>Edit Member Info</h3>
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
+    <Card style={{ margin: 10 }}>
+      <Card.Header style={{ display: "flex" }}>
+        <span
+          style={{
+            color: "black",
+            textDecoration: "none",
+            flex: 1,
+            cursor: "pointer",
+            alignSelf: "center",
+            fontSize: 22,
+            marginLeft: 10,
           }}
-          noValidate
-          autoComplete="off"
-          onSubmit={handleEditMemberSubmit}
         >
-          <TextField
-            required
-            id="outlined-required"
-            label="First Name"
-            placeholder="First Name"
-            defaultValue=""
-            name="memberFirstName"
-            value={memberFormData.memberFirstName}
-            onChange={handleChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            id="outlined-textarea"
-            label="Email"
-            name="memberEmail"
-            placeholder="Email"
-            multiline
-            value={memberFormData.memberEmail}
-            onChange={handleChange}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            id="outlined-category"
-            label="Phone"
-            name="memberPhone"
-            type="tel"
-            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-            value={memberFormData.memberPhone}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <Stack spacing={2} direction="row">
-            <Button value="Save" size="small" onClick={handleEditMemberSubmit}>
-              Save Changes
-            </Button>
-            <Button
-              size="small"
-              className="discard-button"
-              type="button"
-              onClick={handleDiscardChanges}
-            >
-              Discard Changes
-            </Button>
-            <Button
-              size="small"
-              className="delete-button"
-              onClick={() => deleteMember(_id)}
-            >
-              Remove From My Circle
-            </Button>
-          </Stack>
-        </Box>
-      </div>
-    </div>
+          {firstName} {lastName}
+        </span>
+        <div>
+          <Button variant="primary">Edit</Button>
+          <Button
+            onClick={() => deleteMember(_id)}
+            variant="danger"
+            className="mx-2"
+          >
+            Remove
+          </Button>
+        </div>
+      </Card.Header>
+      <Card.Body>
+        <blockquote className="blockquote mb-0" style={{ marginLeft: 10 }}>
+          <p style={{ color: "black", fontSize: 18 }}>{email}</p>
+          <footer
+            style={{ fontSize: 16 }}
+            id="blockquote-footer"
+            className="blockquote-footer"
+          >
+            {" "}
+            <cite title="Source Title">{phone}</cite>
+          </footer>
+        </blockquote>
+      </Card.Body>
+    </Card>
   );
 };
 
