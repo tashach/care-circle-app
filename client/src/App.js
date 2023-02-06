@@ -1,37 +1,38 @@
 import "./App.css";
-import React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import TaskList from "./components/TaskList";
-import MemberList from "./components/MemberList";
-import NewTaskForm from "./components/NewTaskForm";
-import NewMemberForm from "./components/NewMemberForm";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
 import LandingPage from "./components/pages/LandingPage";
 import MyTasks from "./components/pages/MyTasks";
 import LoginPage from "./components/pages/LoginPage";
 import SignUpPage from "./components/pages/SignUpPage";
+import MyCirclePage from "./components/pages/MyCirclePage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState, useEffect } from "react";
+import React from "react";
+import axios from "axios";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 function App() {
-  const [userData, setUserData] = useState([]);
-  // const [USER_ID, setUserId] = useState([]);
+  const [userData, setUserData] = useState({});
+  const [USER_ID, setUserId] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [taskData, setTaskData] = useState([]);
 
   useEffect(() => {
-    console.log("updating task data");
-    setTaskData(userData.tasks);
-  }, [userData]);
+    const loggedInUser = localStorage.getItem("userData");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUserData(foundUser);
+      setUserId(foundUser._id);
+      setLoggedIn(true);
+    }
+  }, []);
 
   const URL = "/api/user";
 
-  const USER_ID = "63d013fc80b92d424dd68e23";
+  // const USER_ID = "63d013fc80b92d424dd68e23";
 
   const loginUser = (email, password, config) => {
     console.log("calling LoginUser with", email, password);
@@ -41,7 +42,8 @@ function App() {
         const userAPICopy = { ...response.data };
         console.log("Calling API", userAPICopy);
         setUserData(userAPICopy);
-        // setUserId(response.data._id);
+        sessionStorage.setItem("token", JSON.stringify(response.data.token));
+        localStorage.setItem("userData", JSON.stringify(response.data));
         setLoggedIn(true);
       })
       .catch((error) => {
@@ -49,20 +51,58 @@ function App() {
       });
   };
 
-  const fetchUserData = () => {
+  // const fetchUserData = (URL, USER_ID) => {
+  //   axios
+  //     .get(`${URL}/${USER_ID}`)
+  //     .then((response) => {
+  //       const userAPICopy = { ...response.data };
+  //       console.log("Calling API");
+  //       setUserData(userAPICopy);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  const createUser = (firstName, lastName, email, password, config) => {
+    console.log(
+      "Calling createUser",
+      firstName,
+      lastName,
+      email,
+      password,
+      config
+    );
     axios
-      .get(`${URL}/${USER_ID}`)
+      .post(
+        `${URL}`,
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        },
+        config
+      )
       .then((response) => {
         const userAPICopy = { ...response.data };
-        console.log("Calling API", USER_ID);
+        console.log("Calling API", userAPICopy);
+        sessionStorage.setItem("token", userData.token);
         setUserData(userAPICopy);
+        console.log("user data", userData);
+        localStorage.setItem("userData", JSON.stringify(response.data));
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  useEffect(fetchUserData, []);
+  const logout = () => {
+    console.log("Logout being called");
+    localStorage.clear();
+    sessionStorage.clear();
+    setLoggedIn(false);
+  };
 
   const addTask = (newTask) => {
     console.log("Calling addTask");
@@ -189,22 +229,42 @@ function App() {
   };
 
   // ------------------------- Rendering ---------------------- //
-
   return (
     <BrowserRouter>
-      <Header />
+      <Header
+        userName={userData.firstName}
+        logout={logout}
+        loggedIn={loggedIn}
+      />
       <main>
         <Routes>
-          <Route path="/" element={<LandingPage />} exact />
-          <Route path="/login" element={<LoginPage loginUser={loginUser} />} />
-          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/" element={<LandingPage />} exact></Route>
+          <Route
+            path="/login"
+            element={<LoginPage loginUser={loginUser} loggedIn={loggedIn} />}
+          />
+          <Route
+            path="/signup"
+            element={<SignUpPage createUser={createUser} loggedIn={loggedIn} />}
+          />
           <Route
             path="/mytasks"
             element={
               <MyTasks
-                taskData={taskData}
+                taskData={userData.tasks}
                 deleteTask={deleteTask}
                 addTask={addTask}
+                userName={userData.firstName}
+              />
+            }
+          />
+          <Route
+            path="/mycircle"
+            element={
+              <MyCirclePage
+                memberData={userData.circle}
+                deleteMember={deleteMember}
+                addMember={addMember}
               />
             }
           />

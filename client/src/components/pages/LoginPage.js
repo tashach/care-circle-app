@@ -1,22 +1,26 @@
 import Mainscreen from "../Mainscreen";
 import "../styles/Mainscreen.css";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
 import { useState } from "react";
 
-const Login = ({ loginUser }) => {
+const Login = ({ loginUser, loggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [error, setError] = useState(false);
-
+  const navigate = useNavigate();
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("calling handleFormSubmit login");
     try {
       const config = { headers: { "Content-type": "application/json" } };
       loginUser(email, password, config);
-    } catch (error) {}
+      navigate("/mytasks");
+    } catch (error) {
+      console.log(e);
+      throw new Error("whoops! something went wrong");
+    }
   };
 
   return (

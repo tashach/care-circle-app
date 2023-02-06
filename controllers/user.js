@@ -2,8 +2,8 @@ const User = require("../models/user");
 const Task = require("../models/task");
 const Member = require("../models/member");
 const asyncHandler = require("express-async-handler");
-
-const { rawListeners, db } = require("../models/user");
+// const { rawListeners, db } = require("../models/user");
+const generateToken = require("../utils/generateToken");
 var ObjectId = require("mongodb").ObjectId;
 
 exports.getAllUsers = (req, res) => {
@@ -30,12 +30,14 @@ exports.postCreateUser = asyncHandler(async (req, res) => {
     throw new Error("User Already Exists");
   }
   const user = await User.create(req.body);
+  user.save();
   if (user) {
     res.status(201).json({
-      _id: user._id,
+      _id: user._id.toString(),
       firstName: user.firstName,
       lastName: user.lastName,
       password: user.password,
+      token: generateToken(user._id),
       circle: [],
       tasks: [],
       inviteCode: "",
@@ -50,7 +52,15 @@ exports.login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email: email });
   if (user && (await user.matchPassword(password))) {
-    res.json(user);
+    res.json({
+      _id: user._id.toString(),
+      firstName: user.firstName,
+      lastName: user.lastName,
+      token: generateToken(user._id),
+      circle: user.circle,
+      tasks: user.tasks,
+      inviteCode: "",
+    });
   } else {
     res.status(400).json({ message: "Incorrect email or password" });
     throw new Error("Incorrect email or password");
