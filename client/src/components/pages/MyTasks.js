@@ -1,6 +1,6 @@
 import Mainscreen from "../Mainscreen";
 import "../styles/Mainscreen.css";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Task from "../Task";
 import "../styles/TaskList.css";
@@ -24,7 +24,7 @@ const MyTasks = ({ deleteTask, editTask, taskData, userName }) => {
   });
   return (
     <Mainscreen title={`Welcome Back ${userName}`}>
-      <Link to="addTask">
+      <Link to="/addTask">
         <Button
           variant="info"
           className="addButton"

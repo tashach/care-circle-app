@@ -6,6 +6,7 @@ import MyTasks from "./components/pages/MyTasks";
 import LoginPage from "./components/pages/LoginPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import MyCirclePage from "./components/pages/MyCirclePage";
+import AddTask from "./components/pages/AddTask";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import React from "react";
@@ -118,6 +119,7 @@ function App() {
         };
         newUserData.tasks.push(newTaskJSON);
         setUserData(newUserData);
+        localStorage.setItem("userData", JSON.stringify(newUserData));
       })
       .catch((error) => {
         console.log(error);
@@ -138,6 +140,7 @@ function App() {
         }
         newUserData.tasks = newTaskList;
         setUserData(newUserData);
+        localStorage.setItem();
       })
       .catch((error) => {
         console.log(error);
@@ -160,6 +163,7 @@ function App() {
         }
         editedUserData.tasks = newTaskList;
         setUserData(editedUserData);
+        localStorage.setItem("userData", JSON.stringify(editedUserData));
       })
       .catch((error) => {
         console.log(error);
@@ -253,6 +257,7 @@ function App() {
               <MyTasks
                 taskData={userData.tasks}
                 deleteTask={deleteTask}
+                editTask={editTask}
                 addTask={addTask}
                 userName={userData.firstName}
               />
@@ -268,6 +273,7 @@ function App() {
               />
             }
           />
+          <Route path="/addtask" element={<AddTask addTask={addTask} />} />
         </Routes>
       </main>
       <Footer />

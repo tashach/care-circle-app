@@ -45,46 +45,58 @@ const SignUpPage = ({ createUser, loggedIn }) => {
     <Mainscreen title="SIGN UP">
       <div className="loginContainer">
         <Form onSubmit={handleFormSubmit}>
-          <Form.Group className="mb-3" controlId="firstName">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter First Name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="lastName">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Last Name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="firstName">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="lastName">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Last Name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
           <Form.Group className="mb-3" controlId="confirmPassword">
             <Form.Label>Confirm Password</Form.Label>
@@ -97,7 +109,7 @@ const SignUpPage = ({ createUser, loggedIn }) => {
           </Form.Group>
 
           <Button variant="primary" type="submit">
-            Sign Up
+            Create Account
           </Button>
         </Form>
         <Row className={`py-3, ${displayClass}`}>

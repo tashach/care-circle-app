@@ -1,11 +1,8 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import { paperClasses } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Form, Row, Col, Button } from "react-bootstrap";
 
 const INITIAL_FORM_STATE = {
   title: "",
@@ -13,6 +10,7 @@ const INITIAL_FORM_STATE = {
 };
 
 const NewTaskForm = ({ addTask }) => {
+  const navigate = useNavigate();
   const [taskFormData, setTaskFormData] = useState(INITIAL_FORM_STATE);
   const [errorStatus, changeErrorStatus] = useState("");
 
@@ -29,6 +27,7 @@ const NewTaskForm = ({ addTask }) => {
   const handleCancel = (e) => {
     setTaskFormData(INITIAL_FORM_STATE);
     changeErrorStatus("");
+    navigate("/mytasks");
   };
 
   const handleNewTaskSubmit = (e) => {
@@ -41,55 +40,67 @@ const NewTaskForm = ({ addTask }) => {
         : addTask(taskFormData);
       changeErrorStatus("Successfully added task");
       setTaskFormData(INITIAL_FORM_STATE);
+      navigate("/mytasks");
     }
   };
   return (
-    <Box
-      component="form"
-      sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
-      }}
-      noValidate
-      autoComplete="off"
-      onSubmit={handleNewTaskSubmit}
-    >
-      <TextField
-        required
-        id="outlined-required"
-        size="small"
-        label="Title"
-        // placeholder="Title"
-        defaultValue=""
-        name="title"
-        value={taskFormData.title}
-        onChange={handleChange}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <TextField
-        id="outlined-textarea"
-        size="small"
-        label="Description"
-        // placeholder="Write Description Here"
-        multiline
-        value={taskFormData.description}
-        name="description"
-        onChange={handleChange}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <Stack spacing={2} direction="row">
-        <Button size="small" variant="contained" onClick={handleNewTaskSubmit}>
-          Add Task
-        </Button>
-        <Button size="small" variant="contained" onClick={handleCancel}>
-          Cancel
-        </Button>
-      </Stack>
-      <p>{errorStatus}</p>
-    </Box>
+    <div className={`addTaskContainer`}>
+      <Form>
+        <Row>
+          <Col>
+            <Form.Group className="mb-3" controlId="title">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                name="title"
+                value={taskFormData.title}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3" controlId="volunteerName">
+              <Form.Label>Circle Member</Form.Label>
+              <Form.Control
+                type="text"
+                name="volunteerName"
+                placeholder="Circle Member"
+                value={taskFormData.volunteerName}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
+          {/* <Col>
+          <Form.Group className="mb-3" controlId="date">
+            <Form.Label>Due Date</Form.Label>
+            <Form.Control
+              type="text"
+              name="volunteerName"
+              placeholder="Due Date"
+              value={taskFormData.volunteerName}
+              onChange={handleChange}
+            />
+          </Form.Group>
+        </Col> */}
+        </Row>
+        <Row>
+          <Form.Group className="mb-3" controlId="description">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              type="text"
+              name="description"
+              placeholder="Description"
+              value={taskFormData.description}
+              onChange={handleChange}
+            />
+          </Form.Group>
+        </Row>
+        <div className="buttonContainer">
+          <Button onClick={handleNewTaskSubmit}>Save Changes</Button>
+          <Button onClick={handleCancel}>Cancel</Button>
+        </div>
+      </Form>
+    </div>
   );
 };
 
