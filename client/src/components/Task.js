@@ -9,6 +9,7 @@ const Task = ({
   title,
   description,
   volunteerName,
+  date,
   isComplete,
   deleteTask,
   editTask,
@@ -17,6 +18,7 @@ const Task = ({
     _id: _id,
     title: title,
     description: description,
+    date: date,
     volunteerName: volunteerName,
     isComplete: isComplete,
   };
@@ -57,8 +59,8 @@ const Task = ({
   };
 
   return (
-    <Card style={{ margin: 10 }}>
-      <Card.Header style={{ display: "flex" }}>
+    <Card style={{ margin: 10 }} className="w-75 p-3">
+      <Card.Title style={{ display: "flex" }}>
         <div className="form-check">
           <input
             className="form-check-input"
@@ -66,42 +68,38 @@ const Task = ({
             onChange={() => handleMarkComplete(!isComplete)}
             value=""
             id="flexCheckDefault"
+            style={{ cursor: "pointer" }}
+            data-bs-toggle="tooltip"
+            data-bs-placement="left"
+            data-bs-original-title="Mark Completed"
           />
-          <label
-            className="form-check-label"
-            htmlFor="flexCheckDefault"
-          ></label>
+          <label className="form-check-label" htmlFor="flexCheckDefault" />
         </div>
         <span
           style={{
             color: "black",
             textDecoration: "none",
             flex: 1,
-            cursor: "pointer",
             alignSelf: "center",
             fontSize: 22,
             marginLeft: 10,
           }}
         >
+          <Badge className="mx-2" bg="info">
+            {date}
+          </Badge>
           {title}
         </span>
-        <h5>
-          <Badge bg="warning">Jan 25</Badge>
-        </h5>
-
         <div>
-          <Button variant="info" onClick={() => setIsHidden(!isHidden)}>
+          <Button
+            size="sm"
+            variant="warning"
+            onClick={() => setIsHidden(!isHidden)}
+          >
             Edit
           </Button>
-          <Button
-            onClick={() => deleteTask(_id)}
-            variant="danger"
-            className="mx-2"
-          >
-            Delete
-          </Button>
         </div>
-      </Card.Header>
+      </Card.Title>
       <Card.Body>
         <blockquote className="blockquote mb-0">
           <p style={{ color: "black", fontSize: 18 }}>{description}</p>
@@ -110,7 +108,7 @@ const Task = ({
             id="blockquote-footer"
             className="blockquote-footer"
           >
-            Circle Member: <cite title="Source Title">{volunteerName}</cite>
+            <cite title="Source Title">{volunteerName}</cite>
           </footer>
         </blockquote>
       </Card.Body>
@@ -123,6 +121,7 @@ const Task = ({
                 <Form.Control
                   type="text"
                   name="title"
+                  placeholder="title"
                   value={taskFormData.title}
                   onChange={handleChange}
                 />
@@ -144,7 +143,7 @@ const Task = ({
               <Form.Group className="mb-3" controlId="date">
                 <Form.Label>Due Date</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="date"
                   name="date"
                   placeholder="Due Date"
                   value={taskFormData.date}
@@ -167,12 +166,29 @@ const Task = ({
               />
             </Form.Group>
           </Row>
-          <div className="buttonContainer">
-            <Button onClick={handleEditTaskSubmit} variant="success">
+          <div className="buttonContainer d-flex flew-row justify-content-end">
+            <Button
+              onClick={handleEditTaskSubmit}
+              className="mx-2"
+              variant="success"
+              size="sm"
+            >
               Save Changes
             </Button>
-            <Button onClick={handleDiscardChanges} variant="outline-danger">
+            <Button
+              size="sm"
+              onClick={handleDiscardChanges}
+              variant="outline-secondary"
+            >
               Discard Changes
+            </Button>
+            <Button
+              size="sm"
+              onClick={() => deleteTask(_id)}
+              variant="danger"
+              className="mx-2"
+            >
+              Delete
             </Button>
           </div>
         </Form>
@@ -188,6 +204,7 @@ Task.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   volunteerName: PropTypes.string,
+  date: PropTypes.string,
   isComplete: PropTypes.bool.isRequired,
   deleteTask: PropTypes.func.isRequired,
 };

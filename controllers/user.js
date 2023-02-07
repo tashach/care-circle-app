@@ -118,6 +118,7 @@ exports.updateTask = (req, res) => {
         "tasks.$.title": req.body.title,
         "tasks.$.description": req.body.description,
         "tasks.$.isComplete": req.body.isComplete,
+        "tasks.$.date": req.body.date,
       },
     }
   )

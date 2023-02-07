@@ -1,5 +1,6 @@
 import "./App.css";
 import Header from "./components/Header";
+import PublicHeader from "./components/PublicHeader";
 import Footer from "./components/Footer";
 import LandingPage from "./components/pages/LandingPage";
 import MyTasks from "./components/pages/MyTasks";
@@ -7,6 +8,7 @@ import LoginPage from "./components/pages/LoginPage";
 import SignUpPage from "./components/pages/SignUpPage";
 import MyCirclePage from "./components/pages/MyCirclePage";
 import AddTask from "./components/pages/AddTask";
+import AddMember from "./components/pages/AddMember";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import React from "react";
@@ -233,52 +235,81 @@ function App() {
   };
 
   // ------------------------- Rendering ---------------------- //
-  return (
-    <BrowserRouter>
-      <Header
-        userName={userData.firstName}
-        logout={logout}
-        loggedIn={loggedIn}
-      />
-      <main>
-        <Routes>
-          <Route path="/" element={<LandingPage />} exact></Route>
-          <Route
-            path="/login"
-            element={<LoginPage loginUser={loginUser} loggedIn={loggedIn} />}
-          />
-          <Route
-            path="/signup"
-            element={<SignUpPage createUser={createUser} loggedIn={loggedIn} />}
-          />
-          <Route
-            path="/mytasks"
-            element={
-              <MyTasks
-                taskData={userData.tasks}
-                deleteTask={deleteTask}
-                editTask={editTask}
-                addTask={addTask}
-                userName={userData.firstName}
-              />
-            }
-          />
-          <Route
-            path="/mycircle"
-            element={
-              <MyCirclePage
-                memberData={userData.circle}
-                deleteMember={deleteMember}
-                addMember={addMember}
-              />
-            }
-          />
-          <Route path="/addtask" element={<AddTask addTask={addTask} />} />
-        </Routes>
-      </main>
-      <Footer />
-    </BrowserRouter>
-  );
+  if (!loggedIn) {
+    return (
+      <BrowserRouter>
+        <PublicHeader />
+        <main>
+          <Routes>
+            {" "}
+            <Route path="/" element={<LandingPage />} exact></Route>
+            <Route
+              path="/login"
+              element={<LoginPage loginUser={loginUser} loggedIn={loggedIn} />}
+            />
+            <Route
+              path="/signup"
+              element={
+                <SignUpPage createUser={createUser} loggedIn={loggedIn} />
+              }
+            />
+          </Routes>
+        </main>
+      </BrowserRouter>
+    );
+  } else {
+    return (
+      <BrowserRouter>
+        <Header
+          userName={userData.firstName}
+          logout={logout}
+          loggedIn={loggedIn}
+        />
+        <main>
+          <Routes>
+            <Route path="/" element={<LandingPage />} exact></Route>
+            <Route
+              path="/login"
+              element={<LoginPage loginUser={loginUser} loggedIn={loggedIn} />}
+            />
+            <Route
+              path="/signup"
+              element={
+                <SignUpPage createUser={createUser} loggedIn={loggedIn} />
+              }
+            />
+            <Route
+              path="/mytasks"
+              element={
+                <MyTasks
+                  taskData={userData.tasks}
+                  deleteTask={deleteTask}
+                  editTask={editTask}
+                  userName={userData.firstName}
+                />
+              }
+            />
+            <Route
+              path="/mycircle"
+              element={
+                <MyCirclePage
+                  memberData={userData.circle}
+                  editMember={editMember}
+                  deleteMember={deleteMember}
+                />
+              }
+            />
+            <Route path="/addtask" element={<AddTask addTask={addTask} />} />
+            <Route
+              path="/addmember"
+              element={<AddMember addMember={addMember} />}
+            />
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;

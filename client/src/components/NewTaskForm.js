@@ -7,12 +7,13 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 const INITIAL_FORM_STATE = {
   title: "",
   description: "",
+  volunteerName: "",
+  date: "",
 };
 
 const NewTaskForm = ({ addTask }) => {
   const navigate = useNavigate();
   const [taskFormData, setTaskFormData] = useState(INITIAL_FORM_STATE);
-  const [errorStatus, changeErrorStatus] = useState("");
 
   const handleChange = (e) => {
     console.log("Handle Change Called");
@@ -26,19 +27,14 @@ const NewTaskForm = ({ addTask }) => {
 
   const handleCancel = (e) => {
     setTaskFormData(INITIAL_FORM_STATE);
-    changeErrorStatus("");
     navigate("/mytasks");
   };
 
   const handleNewTaskSubmit = (e) => {
     if (taskFormData.title === "") {
-      changeErrorStatus("Error: Missing Required Information");
+      console.log("missing required information");
     } else {
       e.preventDefault();
-      taskFormData.title === ""
-        ? changeErrorStatus("Error: Missing Required Information")
-        : addTask(taskFormData);
-      changeErrorStatus("Successfully added task");
       setTaskFormData(INITIAL_FORM_STATE);
       navigate("/mytasks");
     }
@@ -75,8 +71,8 @@ const NewTaskForm = ({ addTask }) => {
             <Form.Group className="mb-3" controlId="date">
               <Form.Label>Due Date</Form.Label>
               <Form.Control
-                type="text"
-                name="Due Date"
+                type="date"
+                name="date"
                 placeholder="Due Date"
                 value={taskFormData.date}
                 onChange={handleChange}

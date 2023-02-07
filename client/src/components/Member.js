@@ -2,7 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import "./styles/Member.css";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Form, Row, Col } from "react-bootstrap";
 
 const Member = ({
   _id,
@@ -83,11 +83,71 @@ const Member = ({
             id="blockquote-footer"
             className="blockquote-footer"
           >
-            {" "}
             <cite title="Source Title">{phone}</cite>
           </footer>
         </blockquote>
       </Card.Body>
+      <div className={`editMemberkContainer ${displayClass}`}>
+        <Form style={{ margin: 10 }}>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="firstName">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="memberFirstName"
+                  value={memberFormData.memberFirstName}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="lastName">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="memberLastName"
+                  placeholder="Last Name"
+                  value={memberFormData.memberLastName}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group className="mb-3" controlId="email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="memberEmail"
+                  placeholder="email"
+                  value={memberFormData.memberEmail}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Form.Group className="mb-3" controlId="phone">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                name="memberPhone"
+                placeholder="Phone"
+                value={memberFormData.memberPhone}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Row>
+          <div className="buttonContainer">
+            <Button onClick={handleEditMemberSubmit} variant="success">
+              Save Changes
+            </Button>
+            <Button onClick={handleDiscardChanges} variant="outline-danger">
+              Discard Changes
+            </Button>
+          </div>
+        </Form>
+      </div>
     </Card>
   );
 };

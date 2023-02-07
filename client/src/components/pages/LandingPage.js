@@ -7,7 +7,8 @@ const LandingPage = () => {
       <Container>
         <Row>
           <div className="intro-text">
-            <h1 className="title">Welcome To Care Circle</h1>
+            <h2 className="title">Welcome To</h2>
+            <h1 className="title">Care Circle</h1>
             <p className="subtitle">
               A way to strengthen connections with loved ones
             </p>

@@ -26,11 +26,10 @@ const MyCirclePage = ({ deleteMember, editMember, memberData }) => {
   });
   return (
     <Mainscreen title="MY CIRCLE">
-      <Link to="addMember">
+      <Link to="/addMember">
         <Button
           variant="info"
           className="addButton"
-          size="lg"
           style={{ marginLeft: 10, marginBottom: 6 }}
         >
           + Invite Someone
