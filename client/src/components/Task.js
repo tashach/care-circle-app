@@ -90,7 +90,7 @@ const Task = ({
         </h5>
 
         <div>
-          <Button variant="primary" onClick={() => setIsHidden(!isHidden)}>
+          <Button variant="info" onClick={() => setIsHidden(!isHidden)}>
             Edit
           </Button>
           <Button
@@ -115,7 +115,7 @@ const Task = ({
         </blockquote>
       </Card.Body>
       <div className={`editTaskContainer ${displayClass}`}>
-        <Form>
+        <Form style={{ margin: 10 }}>
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="title">
@@ -140,18 +140,18 @@ const Task = ({
                 />
               </Form.Group>
             </Col>
-            {/* <Col>
+            <Col>
               <Form.Group className="mb-3" controlId="date">
                 <Form.Label>Due Date</Form.Label>
                 <Form.Control
                   type="text"
-                  name="volunteerName"
+                  name="date"
                   placeholder="Due Date"
-                  value={taskFormData.volunteerName}
+                  value={taskFormData.date}
                   onChange={handleChange}
                 />
               </Form.Group>
-            </Col> */}
+            </Col>
           </Row>
           <Row>
             <Form.Group className="mb-3" controlId="description">
@@ -160,14 +160,20 @@ const Task = ({
                 type="text"
                 name="description"
                 placeholder="Description"
+                as="textarea"
+                rows={3}
                 value={taskFormData.description}
                 onChange={handleChange}
               />
             </Form.Group>
           </Row>
           <div className="buttonContainer">
-            <Button onClick={handleEditTaskSubmit}>Save Changes</Button>
-            <Button onClick={handleDiscardChanges}>Discard Changes</Button>
+            <Button onClick={handleEditTaskSubmit} variant="success">
+              Save Changes
+            </Button>
+            <Button onClick={handleDiscardChanges} variant="outline-danger">
+              Discard Changes
+            </Button>
           </div>
         </Form>
       </div>

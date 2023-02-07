@@ -49,10 +49,11 @@ const NewTaskForm = ({ addTask }) => {
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="title">
-              <Form.Label>Title</Form.Label>
+              <Form.Label>Title*</Form.Label>
               <Form.Control
                 type="text"
                 name="title"
+                placeholder="Title"
                 value={taskFormData.title}
                 onChange={handleChange}
               />
@@ -70,18 +71,18 @@ const NewTaskForm = ({ addTask }) => {
               />
             </Form.Group>
           </Col>
-          {/* <Col>
-          <Form.Group className="mb-3" controlId="date">
-            <Form.Label>Due Date</Form.Label>
-            <Form.Control
-              type="text"
-              name="volunteerName"
-              placeholder="Due Date"
-              value={taskFormData.volunteerName}
-              onChange={handleChange}
-            />
-          </Form.Group>
-        </Col> */}
+          <Col>
+            <Form.Group className="mb-3" controlId="date">
+              <Form.Label>Due Date</Form.Label>
+              <Form.Control
+                type="text"
+                name="Due Date"
+                placeholder="Due Date"
+                value={taskFormData.date}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Col>
         </Row>
         <Row>
           <Form.Group className="mb-3" controlId="description">
@@ -89,6 +90,8 @@ const NewTaskForm = ({ addTask }) => {
             <Form.Control
               type="text"
               name="description"
+              as="textarea"
+              rows={3}
               placeholder="Description"
               value={taskFormData.description}
               onChange={handleChange}
@@ -96,8 +99,12 @@ const NewTaskForm = ({ addTask }) => {
           </Form.Group>
         </Row>
         <div className="buttonContainer">
-          <Button onClick={handleNewTaskSubmit}>Save Changes</Button>
-          <Button onClick={handleCancel}>Cancel</Button>
+          <Button onClick={handleNewTaskSubmit} variant="success">
+            Save New Task
+          </Button>
+          <Button onClick={handleCancel} variant="outline-danger">
+            Cancel
+          </Button>
         </div>
       </Form>
     </div>

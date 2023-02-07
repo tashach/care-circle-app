@@ -25,7 +25,7 @@ const MyCirclePage = ({ deleteMember, editMember, memberData }) => {
     );
   });
   return (
-    <Mainscreen title="My Circle">
+    <Mainscreen title="MY CIRCLE">
       <Link to="addMember">
         <Button
           variant="info"

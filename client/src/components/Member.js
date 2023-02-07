@@ -65,7 +65,7 @@ const Member = ({
           {firstName} {lastName}
         </span>
         <div>
-          <Button variant="primary">Edit</Button>
+          <Button variant="info">Edit</Button>
           <Button
             onClick={() => deleteMember(_id)}
             variant="danger"

@@ -3,7 +3,7 @@ import Mainscreen from "../Mainscreen";
 
 const AddTask = ({ addTask }) => {
   return (
-    <Mainscreen title="Add a New Task">
+    <Mainscreen title="I could use help with...">
       <NewTaskForm addTask={addTask}></NewTaskForm>
     </Mainscreen>
   );

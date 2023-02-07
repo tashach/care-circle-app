@@ -4,26 +4,29 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Task from "../Task";
 import "../styles/TaskList.css";
+
 const MyTasks = ({ deleteTask, editTask, taskData, userName }) => {
   console.log(taskData);
 
   const taskComponents = taskData?.map((task) => {
-    return (
-      <li key={task._id}>
-        <Task
-          _id={task._id}
-          title={task.title}
-          description={task.description}
-          volunteerName={task.volunteerName}
-          isComplete={task.isComplete}
-          deleteTask={deleteTask}
-          editTask={editTask}
-        />
-      </li>
-    );
+    if (!task.isComplete) {
+      return (
+        <li key={task._id}>
+          <Task
+            _id={task._id}
+            title={task.title}
+            description={task.description}
+            volunteerName={task.volunteerName}
+            isComplete={task.isComplete}
+            deleteTask={deleteTask}
+            editTask={editTask}
+          />
+        </li>
+      );
+    }
   });
   return (
-    <Mainscreen title={`Welcome Back ${userName}`}>
+    <Mainscreen title={`Welcome Back, ${userName}!`}>
       <Link to="/addTask">
         <Button
           variant="info"
