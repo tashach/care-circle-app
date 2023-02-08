@@ -3,67 +3,63 @@ import "../styles/Mainscreen.css";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AlertItem from "../components/AlertItem";
 import PropTypes from "prop-types";
+import { useAppContext } from "../context/AppContext";
 
+const INITIAL_FORM_STATE = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 const SignUpPage = ({ createUser }) => {
-  const INITIAL_FORM_STATE = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    showAlert: false,
-  };
   const [values, setValues] = useState(INITIAL_FORM_STATE);
+
+  const { isLoading, showAlert, displayAlert } = useAppContext();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     console.log("Handle Change Called");
-    const value = e.target.value;
     const newFormData = {
       ...values,
-      [e.target.name]: value,
+      [e.target.name]: e.target.value,
     };
     setValues(newFormData);
   };
 
-  const [message, setMessage] = useState("");
-  const [isHidden, setIsHidden] = useState(true);
-
-  const navigate = useNavigate();
-
   const onSubmit = (e) => {
-    if (values.password !== values.confirmPassword) {
-      setIsHidden(false);
-      setMessage("Passwords do not match");
-    } else {
-      e.preventDefault();
-      console.log("calling onSubmit signup");
-      try {
-        const config = { headers: { "Content-type": "application/json" } };
-        createUser(
-          values.firstName,
-          values.lastName,
-          values.email,
-          values.password,
-          config
-        );
-        setIsHidden(false);
-        setMessage("Successfully Created User");
-        navigate("/mytasks");
-      } catch (error) {
-        setIsHidden(false);
-        setMessage(error);
-      }
+    e.preventDefault();
+    console.log("calling submit form");
+    const { firstName, lastName, email, password, confirmPassword } = values;
+    if (
+      !email ||
+      !password ||
+      !firstName ||
+      !lastName ||
+      password !== confirmPassword
+    ) {
+      displayAlert();
+      return;
     }
+    const config = { headers: { "Content-type": "application/json" } };
+    createUser(
+      values.firstName,
+      values.lastName,
+      values.email,
+      values.password,
+      config
+    );
+    navigate("/addtask");
   };
 
   return (
     <Mainscreen title="SIGN UP">
       <div className="loginContainer">
         <Form onSubmit={onSubmit}>
-          {values.showAlert && <AlertItem />}
+          {showAlert && <AlertItem />}
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="firstName">
@@ -71,6 +67,7 @@ const SignUpPage = ({ createUser }) => {
                 <Form.Control
                   type="text"
                   placeholder="Enter First Name"
+                  name="firstName"
                   value={values.firstName}
                   onChange={handleChange}
                 />
@@ -82,6 +79,7 @@ const SignUpPage = ({ createUser }) => {
                 <Form.Control
                   type="text"
                   placeholder="Enter Last Name"
+                  name="lastName"
                   value={values.lastName}
                   onChange={handleChange}
                 />
@@ -96,6 +94,7 @@ const SignUpPage = ({ createUser }) => {
                 <Form.Control
                   type="email"
                   placeholder="Enter email"
+                  name="email"
                   value={values.email}
                   onChange={handleChange}
                 />
@@ -110,6 +109,7 @@ const SignUpPage = ({ createUser }) => {
                 <Form.Control
                   type="password"
                   placeholder="Password"
+                  name="password"
                   value={values.password}
                   onChange={handleChange}
                 />
@@ -122,6 +122,7 @@ const SignUpPage = ({ createUser }) => {
             <Form.Control
               type="password"
               placeholder="Confirm Password"
+              name="confirmPassword"
               value={values.confirmPassword}
               onChange={handleChange}
             />

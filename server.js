@@ -3,15 +3,19 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/db");
+// const notFoundMiddleware = require("./middleware/not-found");
+// const errorHandlerMiddleWare = require("./middleware/error-handler");
 const app = express();
 const user = require("./routes/user");
-const { response } = require("express");
 
+// db and authenticateUser
 connectDB();
 
 app.use(cors({ origin: true, credentials: true }));
 
-// initialize middleware
+//middleware
+
+// this allows json data to be available
 app.use(express.json({ extended: false }));
 // app.get("/", (req, res) => res.send("Server up and running"));
 app.use(function (req, res, next) {
@@ -25,9 +29,10 @@ app.use(function (req, res, next) {
   );
   next();
 });
+// app.use(notFoundMiddleware);
+// app.use(errorHandlerMiddleWare);
 app.use("/api/user", user);
 
-// setting up port
 const PORT = process.env.PORT || 5000;
 
 //----------deployment-------------//

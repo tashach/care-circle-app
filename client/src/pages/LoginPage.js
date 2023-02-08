@@ -4,31 +4,40 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
 import { useState } from "react";
+import AlertItem from "../components/AlertItem";
+import { useAppContext } from "../context/AppContext";
 
-const Login = ({ loginUser, loggedIn }) => {
-  const INITIAL_FORM_STATE = {
-    email: "",
-    password: "",
-  };
-
+const INITIAL_FORM_STATE = {
+  email: "",
+  password: "",
+};
+const Login = ({ loginUser }) => {
   const [values, setValues] = useState(INITIAL_FORM_STATE);
+
+  const { isLoading, showAlert, displayAlert } = useAppContext();
 
   const handleChange = (e) => {
     console.log("Handle Change Called");
-    const value = e.target.value;
     const newFormData = {
       ...values,
-      [e.target.name]: value,
+      [e.target.name]: e.target.value,
     };
     setValues(newFormData);
   };
   const navigate = useNavigate();
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("calling handleFormSubmit login");
+    const { email, password } = values;
+    if (!email || !password) {
+      displayAlert();
+      return;
+    }
+    console.log(values);
     try {
       const config = { headers: { "Content-type": "application/json" } };
-      loginUser(values.email, values.password, config);
+      loginUser(email, password, config);
       navigate("/mytasks");
     } catch (error) {
       console.log(e);
@@ -40,11 +49,13 @@ const Login = ({ loginUser, loggedIn }) => {
     <Mainscreen title="LOGIN">
       <div className="loginContainer">
         <Form onSubmit={handleFormSubmit}>
+          {showAlert && <AlertItem />}
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter email"
+              name="email"
               value={values.email}
               onChange={handleChange}
             />
@@ -58,6 +69,7 @@ const Login = ({ loginUser, loggedIn }) => {
             <Form.Control
               type="password"
               placeholder="Password"
+              name="password"
               value={values.password}
               onChange={handleChange}
             />

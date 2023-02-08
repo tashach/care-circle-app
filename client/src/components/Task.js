@@ -102,13 +102,13 @@ const Task = ({
       </Card.Title>
       <Card.Body>
         <blockquote className="blockquote mb-0">
-          <p style={{ color: "black", fontSize: 18 }}>{description}</p>
+          <p style={{ color: "black", fontSize: 18 }}>{volunteerName}</p>
           <footer
             style={{ fontSize: 16 }}
             id="blockquote-footer"
             className="blockquote-footer"
           >
-            <cite title="Source Title">{volunteerName}</cite>
+            <cite title="Source Title">{description}</cite>
           </footer>
         </blockquote>
       </Card.Body>

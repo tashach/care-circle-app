@@ -2,7 +2,6 @@ const User = require("../models/user");
 const Task = require("../models/task");
 const Member = require("../models/member");
 const asyncHandler = require("express-async-handler");
-// const { rawListeners, db } = require("../models/user");
 const generateToken = require("../utils/generateToken");
 var ObjectId = require("mongodb").ObjectId;
 
@@ -23,40 +22,42 @@ exports.getOneUser = (req, res) => {
 };
 
 exports.postCreateUser = asyncHandler(async (req, res) => {
+  console.log("calling create user");
   const userExists = await User.findOne({ email: req.body.email });
-
   if (userExists) {
     res.status(400).json({ message: "User Already Exists" });
     throw new Error("User Already Exists");
   }
-  const user = await User.create(req.body);
-  user.save();
-  if (user) {
+  try {
+    const user = await User.create(req.body);
+    user.save();
+    const token = generateToken(user._id);
     res.status(201).json({
       _id: user._id.toString(),
       firstName: user.firstName,
       lastName: user.lastName,
-      password: user.password,
-      token: generateToken(user._id),
+      // password: user.password,
+      token: token,
       circle: [],
       tasks: [],
       inviteCode: "",
     });
-  } else {
-    res.status(400);
-    throw new Error("Failed to create User");
+  } catch (error) {
+    res.status(500).json({ msg: "error, user not created" });
   }
 });
 
 exports.login = asyncHandler(async (req, res) => {
+  console.log("request body", req.body);
   const { email, password } = req.body;
   const user = await User.findOne({ email: email });
   if (user && (await user.matchPassword(password))) {
+    const token = generateToken(user._id);
     res.json({
       _id: user._id.toString(),
       firstName: user.firstName,
       lastName: user.lastName,
-      token: generateToken(user._id),
+      token: token,
       circle: user.circle,
       tasks: user.tasks,
       inviteCode: "",
