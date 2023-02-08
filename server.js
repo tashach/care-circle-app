@@ -19,9 +19,13 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extended: false }));
 // app.get("/", (req, res) => res.send("Server up and running"));
 app.use(function (req, res, next) {
+  // res.setHeader(
+  //   "Content-Security-Policy",
+  //   "default-src 'self''unsafe-inline'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; frame-src 'self'; connect-src 'self'; style-src-elem 'self'; manifest-src 'self';"
+  // );
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self''unsafe-inline'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; frame-src 'self'; connect-src 'self'; style-src-elem 'self'; manifest-src 'self';"
+    "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-src 'self'; connect-src 'self' 'http://localhost:5000/api/user/63d013fc80b92d424dd68e23';"
   );
   res.setHeader(
     "Access-Control-Allow-Origin",
