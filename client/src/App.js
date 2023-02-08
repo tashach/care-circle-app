@@ -2,14 +2,17 @@ import "./App.css";
 import Header from "./components/Header";
 import PublicHeader from "./components/PublicHeader";
 import Footer from "./components/Footer";
-import LandingPage from "./components/pages/LandingPage";
-import MyTasks from "./components/pages/MyTasks";
-import LoginPage from "./components/pages/LoginPage";
-import GuestLogin from "./components/pages/GuestLogin";
-import SignUpPage from "./components/pages/SignUpPage";
-import MyCirclePage from "./components/pages/MyCirclePage";
-import AddTask from "./components/pages/AddTask";
-import AddMember from "./components/pages/AddMember";
+import {
+  ErrorPage,
+  AddTask,
+  AddMember,
+  GuestLogin,
+  LandingPage,
+  MyCirclePage,
+  MyTasks,
+  LoginPage,
+  SignUpPage,
+} from "./pages";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import React from "react";
@@ -285,6 +288,7 @@ function App() {
             path="/addmember"
             element={<AddMember addMember={addMember} />}
           />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </main>
       <Footer />

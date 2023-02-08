@@ -1,10 +1,10 @@
-import Mainscreen from "../Mainscreen";
+import Mainscreen from "../components/Mainscreen";
 import "../styles/Mainscreen.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import Task from "../Task";
-import CompletedTask from "../CompletedTask";
+import Task from "../components/Task";
+import CompletedTask from "../components/CompletedTask";
 import "../styles/TaskList.css";
 
 const MyTasks = ({ deleteTask, editTask, taskData, userName }) => {

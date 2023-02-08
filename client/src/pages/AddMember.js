@@ -1,5 +1,5 @@
-import Mainscreen from "../Mainscreen";
-import NewMemberForm from "../NewMemberForm";
+import Mainscreen from "../components/Mainscreen";
+import NewMemberForm from "../components/NewMemberForm";
 
 const AddMember = ({ addMember }) => {
   return (

@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import "./styles/Task.css";
+import "../styles/Task.css";
 import { Button, Card, Badge, Row, Col, Form } from "react-bootstrap";
 
 const Task = ({
@@ -59,7 +59,7 @@ const Task = ({
   };
 
   return (
-    <Card style={{ margin: 10 }} className="w-75 p-3">
+    <Card style={{ margin: 10 }} className="w-75 p-3 shadow-sm">
       <Card.Title style={{ display: "flex" }}>
         <div className="form-check">
           <input

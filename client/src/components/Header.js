@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import "./styles/Header.css";
+import "../styles/Header.css";
 
 const Header = ({ userName, logout, loggedIn }) => {
   const navigate = useNavigate();

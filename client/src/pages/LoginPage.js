@@ -1,4 +1,4 @@
-import Mainscreen from "../Mainscreen";
+import Mainscreen from "../components/Mainscreen";
 import "../styles/Mainscreen.css";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";

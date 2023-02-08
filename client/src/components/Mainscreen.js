@@ -1,5 +1,5 @@
 import { Container, Row } from "react-bootstrap";
-import "./styles/Mainscreen.css";
+import "../styles/Mainscreen.css";
 
 const Mainscreen = ({ title, children }) => {
   return (

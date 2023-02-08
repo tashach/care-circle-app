@@ -1,5 +1,5 @@
-import NewTaskForm from "../NewTaskForm";
-import Mainscreen from "../Mainscreen";
+import NewTaskForm from "../components/NewTaskForm";
+import Mainscreen from "../components/Mainscreen";
 
 const AddTask = ({ addTask }) => {
   return (

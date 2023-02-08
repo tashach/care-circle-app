@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import "./styles/Member.css";
+import "../styles/Member.css";
 import { Button, Card, Form, Row, Col } from "react-bootstrap";
 
 const Member = ({

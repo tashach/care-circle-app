@@ -1,8 +1,8 @@
-import Mainscreen from "../Mainscreen";
+import Mainscreen from "../components/Mainscreen";
 import "../styles/Mainscreen.css";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import Member from "../Member";
+import Member from "../components/Member";
 import "../styles/TaskList.css";
 // import { useEffect, useState } from "react";
 
