@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
   // );
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap' 'unsafe-inline'; frame-src 'self'; connect-src 'self' 'http://localhost:5000/api/user/63d013fc80b92d424dd68e23';"
+    "default-src 'self'; font-src 'self' 'fonts.gstatic.com'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'fonts.googleapis.com' 'unsafe-inline'; frame-src 'self'; connect-src 'self' 'http://localhost:5000/api/user/63d013fc80b92d424dd68e23';"
   );
   res.setHeader(
     "Access-Control-Allow-Origin",

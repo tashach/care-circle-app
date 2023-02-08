@@ -35,6 +35,7 @@ const Login = ({ loginUser }) => {
       return;
     }
     console.log(values);
+    const currentUser = { email, password };
     try {
       const config = { headers: { "Content-type": "application/json" } };
       loginUser(email, password, config);
@@ -75,7 +76,7 @@ const Login = ({ loginUser }) => {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" disabled={isLoading}>
             Submit
           </Button>
         </Form>

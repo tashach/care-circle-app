@@ -1,4 +1,10 @@
-import { CLEAR_ALERT, DISPLAY_ALERT } from "./actions";
+import {
+  CLEAR_ALERT,
+  DISPLAY_ALERT,
+  LOGIN_USER,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_ERROR,
+} from "./actions";
 
 const reducer = (state, action) => {
   if (action.type === DISPLAY_ALERT) {
