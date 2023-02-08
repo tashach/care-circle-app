@@ -21,7 +21,7 @@ app.use(express.json({ extended: false }));
 app.use(function (req, res, next) {
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self''unsafe-inline''manifest-src'; font-src 'self' 'fonts.googleapis.com'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'fonts.googleapis.com' 'unsafe-inline'; frame-src 'self'; connect-src 'self'; style-src-elem 'self;"
+    "default-src 'self''unsafe-inline'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; frame-src 'self'; connect-src 'self'; style-src-elem 'self'; manifest-src 'self';"
   );
   res.setHeader(
     "Access-Control-Allow-Origin",
