@@ -1,41 +1,59 @@
 import Mainscreen from "../components/Mainscreen";
 import "../styles/Mainscreen.css";
-import { Form, Button, Row, Col, Alert } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import AlertItem from "../components/AlertItem";
+import PropTypes from "prop-types";
 
-const SignUpPage = ({ createUser, loggedIn }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+const SignUpPage = ({ createUser }) => {
+  const INITIAL_FORM_STATE = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    showAlert: false,
+  };
+  const [values, setValues] = useState(INITIAL_FORM_STATE);
+
+  const handleChange = (e) => {
+    console.log("Handle Change Called");
+    const value = e.target.value;
+    const newFormData = {
+      ...values,
+      [e.target.name]: value,
+    };
+    setValues(newFormData);
+  };
+
   const [message, setMessage] = useState("");
   const [isHidden, setIsHidden] = useState(true);
-  const [alertVariant, setAlertVariant] = useState("");
-
-  const displayClass = isHidden === true ? "hidden" : "show";
 
   const navigate = useNavigate();
-  const handleFormSubmit = (e) => {
-    if (password !== confirmPassword) {
+
+  const onSubmit = (e) => {
+    if (values.password !== values.confirmPassword) {
       setIsHidden(false);
-      setAlertVariant("danger");
       setMessage("Passwords do not match");
     } else {
       e.preventDefault();
-      console.log("calling handleFormSubmit signup");
+      console.log("calling onSubmit signup");
       try {
         const config = { headers: { "Content-type": "application/json" } };
-        createUser(firstName, lastName, email, password, config);
+        createUser(
+          values.firstName,
+          values.lastName,
+          values.email,
+          values.password,
+          config
+        );
         setIsHidden(false);
-        setAlertVariant("success");
         setMessage("Successfully Created User");
         navigate("/mytasks");
       } catch (error) {
         setIsHidden(false);
-        setAlertVariant("danger");
         setMessage(error);
       }
     }
@@ -44,7 +62,8 @@ const SignUpPage = ({ createUser, loggedIn }) => {
   return (
     <Mainscreen title="SIGN UP">
       <div className="loginContainer">
-        <Form onSubmit={handleFormSubmit}>
+        <Form onSubmit={onSubmit}>
+          {values.showAlert && <AlertItem />}
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="firstName">
@@ -52,8 +71,8 @@ const SignUpPage = ({ createUser, loggedIn }) => {
                 <Form.Control
                   type="text"
                   placeholder="Enter First Name"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  value={values.firstName}
+                  onChange={handleChange}
                 />
               </Form.Group>
             </Col>
@@ -63,8 +82,8 @@ const SignUpPage = ({ createUser, loggedIn }) => {
                 <Form.Control
                   type="text"
                   placeholder="Enter Last Name"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  value={values.lastName}
+                  onChange={handleChange}
                 />
               </Form.Group>
             </Col>
@@ -77,8 +96,8 @@ const SignUpPage = ({ createUser, loggedIn }) => {
                 <Form.Control
                   type="email"
                   placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={values.email}
+                  onChange={handleChange}
                 />
                 <Form.Text className="text-muted">
                   We'll never share your email with anyone else.
@@ -91,8 +110,8 @@ const SignUpPage = ({ createUser, loggedIn }) => {
                 <Form.Control
                   type="password"
                   placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={values.password}
+                  onChange={handleChange}
                 />
               </Form.Group>
             </Col>
@@ -103,8 +122,8 @@ const SignUpPage = ({ createUser, loggedIn }) => {
             <Form.Control
               type="password"
               placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={values.confirmPassword}
+              onChange={handleChange}
             />
           </Form.Group>
 
@@ -112,9 +131,6 @@ const SignUpPage = ({ createUser, loggedIn }) => {
             Create Account
           </Button>
         </Form>
-        <Row className={`py-3, ${displayClass}`}>
-          <Alert variant={alertVariant}>{message} </Alert>
-        </Row>
         <Row className="py-3">
           <Col>
             Have an account? <Link to="/login">Login Here</Link>
@@ -126,3 +142,7 @@ const SignUpPage = ({ createUser, loggedIn }) => {
 };
 
 export default SignUpPage;
+
+SignUpPage.propTypes = {
+  createUser: PropTypes.func.isRequired,
+};

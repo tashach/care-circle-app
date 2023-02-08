@@ -6,16 +6,29 @@ import "../styles/LoginPage.css";
 import { useState } from "react";
 
 const Login = ({ loginUser, loggedIn }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // const [error, setError] = useState(false);
+  const INITIAL_FORM_STATE = {
+    email: "",
+    password: "",
+  };
+
+  const [values, setValues] = useState(INITIAL_FORM_STATE);
+
+  const handleChange = (e) => {
+    console.log("Handle Change Called");
+    const value = e.target.value;
+    const newFormData = {
+      ...values,
+      [e.target.name]: value,
+    };
+    setValues(newFormData);
+  };
   const navigate = useNavigate();
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("calling handleFormSubmit login");
     try {
       const config = { headers: { "Content-type": "application/json" } };
-      loginUser(email, password, config);
+      loginUser(values.email, values.password, config);
       navigate("/mytasks");
     } catch (error) {
       console.log(e);
@@ -32,8 +45,8 @@ const Login = ({ loginUser, loggedIn }) => {
             <Form.Control
               type="email"
               placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={values.email}
+              onChange={handleChange}
             />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
@@ -45,8 +58,8 @@ const Login = ({ loginUser, loggedIn }) => {
             <Form.Control
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={values.password}
+              onChange={handleChange}
             />
           </Form.Group>
 
