@@ -70,7 +70,7 @@ const MyTasks = ({ deleteTask, editTask, taskData, userName }) => {
       </Form>
       {taskComponents}
       <div className={displayClass}>
-        <p className="mx-2">Completed</p>
+        <p className="mx-2"></p>
         {completedTaskComponents}
       </div>
     </Mainscreen>
