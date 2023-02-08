@@ -7,23 +7,23 @@ const LandingPage = () => {
       <Container>
         <Row>
           <div className="intro-text">
-            <h1 className="title">Welcome To Care Circle</h1>
+            <h2 className="title">Welcome To</h2>
+            <h1 className="title">Care Circle</h1>
             <p className="subtitle">
               A way to strengthen connections with loved ones
             </p>
           </div>
           <div className="buttonContainer">
             <a href="/login">
-              <Button size="lg" className="landingbutton">
-                Login
+              <Button className="landingbutton">Login</Button>
+            </a>
+            <a href="/guestlogin">
+              <Button className="landingbutton" variant="secondary">
+                Login as Guest
               </Button>
             </a>
             <a href="/signup">
-              <Button
-                size="lg"
-                className="landingbutton"
-                variant="outline-primary"
-              >
+              <Button className="landingbutton" variant="outline-primary">
                 Sign Up
               </Button>
             </a>

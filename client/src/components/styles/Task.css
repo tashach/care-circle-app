@@ -2,3 +2,13 @@
     align-self: center;
 }
 
+.hidden {
+    display: none;
+}
+
+.buttonContainer {
+    margin-top: 0;
+    display: flex;
+    padding-bottom: 10;
+}
+

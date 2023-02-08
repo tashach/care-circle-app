@@ -17,6 +17,10 @@ const TaskSchema = new mongoose.Schema({
     type: "String",
     default: "",
   },
+  date: {
+    type: "Date",
+    default: "",
+  },
 });
 
 const Task = mongoose.model("Task", TaskSchema);

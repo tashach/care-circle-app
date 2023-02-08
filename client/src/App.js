@@ -1,11 +1,15 @@
 import "./App.css";
 import Header from "./components/Header";
+import PublicHeader from "./components/PublicHeader";
 import Footer from "./components/Footer";
 import LandingPage from "./components/pages/LandingPage";
 import MyTasks from "./components/pages/MyTasks";
 import LoginPage from "./components/pages/LoginPage";
+import GuestLogin from "./components/pages/GuestLogin";
 import SignUpPage from "./components/pages/SignUpPage";
 import MyCirclePage from "./components/pages/MyCirclePage";
+import AddTask from "./components/pages/AddTask";
+import AddMember from "./components/pages/AddMember";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import React from "react";
@@ -118,6 +122,7 @@ function App() {
         };
         newUserData.tasks.push(newTaskJSON);
         setUserData(newUserData);
+        localStorage.setItem("userData", JSON.stringify(newUserData));
       })
       .catch((error) => {
         console.log(error);
@@ -138,6 +143,7 @@ function App() {
         }
         newUserData.tasks = newTaskList;
         setUserData(newUserData);
+        localStorage.setItem();
       })
       .catch((error) => {
         console.log(error);
@@ -160,6 +166,7 @@ function App() {
         }
         editedUserData.tasks = newTaskList;
         setUserData(editedUserData);
+        localStorage.setItem("userData", JSON.stringify(editedUserData));
       })
       .catch((error) => {
         console.log(error);
@@ -180,6 +187,7 @@ function App() {
         };
         newUserData.circle.push(newMemberJSON);
         setUserData(newUserData);
+        localStorage.setItem("userData", JSON.stringify(newUserData));
       })
       .catch((error) => {
         console.log(error);
@@ -200,6 +208,7 @@ function App() {
         }
         newUserData.circle = newMemberList;
         setUserData(newUserData);
+        localStorage.setItem("userData", JSON.stringify(newUserData));
       })
       .catch((error) => {
         console.log(error);
@@ -222,6 +231,7 @@ function App() {
         }
         editedUserData.circle = newMemberList;
         setUserData(editedUserData);
+        localStorage.setItem("userData", JSON.stringify(editedUserData));
       })
       .catch((error) => {
         console.log(error);
@@ -229,6 +239,7 @@ function App() {
   };
 
   // ------------------------- Rendering ---------------------- //
+
   return (
     <BrowserRouter>
       <Header
@@ -247,13 +258,14 @@ function App() {
             path="/signup"
             element={<SignUpPage createUser={createUser} loggedIn={loggedIn} />}
           />
+          <Route path="/guestlogin" element={<GuestLogin />} />
           <Route
             path="/mytasks"
             element={
               <MyTasks
                 taskData={userData.tasks}
                 deleteTask={deleteTask}
-                addTask={addTask}
+                editTask={editTask}
                 userName={userData.firstName}
               />
             }
@@ -263,10 +275,15 @@ function App() {
             element={
               <MyCirclePage
                 memberData={userData.circle}
+                editMember={editMember}
                 deleteMember={deleteMember}
-                addMember={addMember}
               />
             }
+          />
+          <Route path="/addtask" element={<AddTask addTask={addTask} />} />
+          <Route
+            path="/addmember"
+            element={<AddMember addMember={addMember} />}
           />
         </Routes>
       </main>
