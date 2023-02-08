@@ -15,16 +15,15 @@ const LandingPage = () => {
           </div>
           <div className="buttonContainer">
             <a href="/login">
-              <Button size="lg" className="landingbutton">
-                Login
+              <Button className="landingbutton">Login</Button>
+            </a>
+            <a href="/guestlogin">
+              <Button className="landingbutton" variant="secondary">
+                Login as Guest
               </Button>
             </a>
             <a href="/signup">
-              <Button
-                size="lg"
-                className="landingbutton"
-                variant="outline-primary"
-              >
+              <Button className="landingbutton" variant="outline-primary">
                 Sign Up
               </Button>
             </a>

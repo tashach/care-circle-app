@@ -35,6 +35,8 @@ const NewTaskForm = ({ addTask }) => {
       console.log("missing required information");
     } else {
       e.preventDefault();
+      console.log("Calling form submit");
+      addTask(taskFormData);
       setTaskFormData(INITIAL_FORM_STATE);
       navigate("/mytasks");
     }

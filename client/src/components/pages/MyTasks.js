@@ -51,7 +51,7 @@ const MyTasks = ({ deleteTask, editTask, taskData, userName }) => {
   });
   return (
     <Mainscreen title={`Welcome Back, ${userName}!`}>
-      <Link to="/addTask">
+      <Link to="/addtask">
         <Button
           variant="info"
           className="addButton"
@@ -69,10 +69,10 @@ const MyTasks = ({ deleteTask, editTask, taskData, userName }) => {
         />
       </Form>
       {taskComponents}
-      <container className={displayClass}>
+      <div className={displayClass}>
         <p className="mx-2">Completed</p>
         {completedTaskComponents}
-      </container>
+      </div>
     </Mainscreen>
   );
 };

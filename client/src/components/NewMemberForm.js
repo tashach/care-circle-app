@@ -30,6 +30,7 @@ const NewMemberForm = ({ addMember }) => {
     e.preventDefault();
     addMember(memberFormData);
     setMemberFormData(INITIAL_FORM_STATE);
+    navigate("/mycircle");
   };
 
   const handleCancel = (e) => {
@@ -41,7 +42,7 @@ const NewMemberForm = ({ addMember }) => {
     "LINK: https://care-circle-app.herokuapp.com \nINVITE CODE: TEST@1555";
 
   return (
-    <div className={`addMemberContainer`}>
+    <div>
       <Form>
         <Row>
           <Col>
@@ -74,7 +75,7 @@ const NewMemberForm = ({ addMember }) => {
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email</Form.Label>
               <Form.Control
-                type="text"
+                type="email"
                 name="memberEmail"
                 placeholder="Email"
                 value={memberFormData.memberEmail}
@@ -86,7 +87,7 @@ const NewMemberForm = ({ addMember }) => {
             <Form.Group className="mb-3" controlId="phone">
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
-                type="text"
+                type="phone"
                 name="memberPhone"
                 placeholder="Phone"
                 value={memberFormData.memberPhone}
@@ -96,15 +97,18 @@ const NewMemberForm = ({ addMember }) => {
           </Col>
         </Row>
         <Row>
-          {" "}
           <Col>
+            <p>
+              To invite someone to your circle, send them the link and invite
+              code. They should be good to go from there!{" "}
+            </p>
             <Card style={{ width: "18rem" }}>
               <Card.Body>
                 <Card.Title>Link and Invite Code</Card.Title>
-                <Card.Text class="text-secondary">
+                <Card.Text className="text-secondary">
                   LINK: https://care-circle-app.herokuapp.com
                 </Card.Text>
-                <Card.Text class="text-secondary">
+                <Card.Text className="text-secondary">
                   INVITE CODE: TEST@1555
                 </Card.Text>
                 <Button

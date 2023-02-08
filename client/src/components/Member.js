@@ -49,7 +49,7 @@ const Member = ({
   };
 
   return (
-    <Card style={{ margin: 10 }}>
+    <Card style={{ margin: 10 }} className="w-75">
       <Card.Header style={{ display: "flex" }}>
         <span
           style={{
@@ -65,11 +65,18 @@ const Member = ({
           {firstName} {lastName}
         </span>
         <div>
-          <Button variant="info">Edit</Button>
+          <Button
+            size="sm"
+            variant="info"
+            onClick={() => setIsHidden(!isHidden)}
+          >
+            Edit
+          </Button>
           <Button
             onClick={() => deleteMember(_id)}
             variant="danger"
             className="mx-2"
+            size="sm"
           >
             Remove
           </Button>
@@ -117,7 +124,7 @@ const Member = ({
               <Form.Group className="mb-3" controlId="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="email"
                   name="memberEmail"
                   placeholder="email"
                   value={memberFormData.memberEmail}
@@ -125,27 +132,39 @@ const Member = ({
                 />
               </Form.Group>
             </Col>
+            <Col>
+              {" "}
+              <Form.Group className="mb-3" controlId="phone">
+                <Form.Label>Phone</Form.Label>
+                <Form.Control
+                  type="phone"
+                  name="memberPhone"
+                  placeholder="Phone"
+                  value={memberFormData.memberPhone}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
           </Row>
-          <Row>
-            <Form.Group className="mb-3" controlId="phone">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                name="memberPhone"
-                placeholder="Phone"
-                value={memberFormData.memberPhone}
-                onChange={handleChange}
-              />
-            </Form.Group>
+          <Row className="buttonContainer">
+            <Col className="d-flex justify-content-end">
+              <Button
+                onClick={handleEditMemberSubmit}
+                variant="success"
+                className="mx-2"
+                size="sm"
+              >
+                Save Changes
+              </Button>
+              <Button
+                size="sm"
+                onClick={handleDiscardChanges}
+                variant="outline-danger"
+              >
+                Discard Changes
+              </Button>
+            </Col>
           </Row>
-          <div className="buttonContainer">
-            <Button onClick={handleEditMemberSubmit} variant="success">
-              Save Changes
-            </Button>
-            <Button onClick={handleDiscardChanges} variant="outline-danger">
-              Discard Changes
-            </Button>
-          </div>
         </Form>
       </div>
     </Card>

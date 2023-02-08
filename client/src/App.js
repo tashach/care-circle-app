@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import LandingPage from "./components/pages/LandingPage";
 import MyTasks from "./components/pages/MyTasks";
 import LoginPage from "./components/pages/LoginPage";
+import GuestLogin from "./components/pages/GuestLogin";
 import SignUpPage from "./components/pages/SignUpPage";
 import MyCirclePage from "./components/pages/MyCirclePage";
 import AddTask from "./components/pages/AddTask";
@@ -186,6 +187,7 @@ function App() {
         };
         newUserData.circle.push(newMemberJSON);
         setUserData(newUserData);
+        localStorage.setItem("userData", JSON.stringify(newUserData));
       })
       .catch((error) => {
         console.log(error);
@@ -206,6 +208,7 @@ function App() {
         }
         newUserData.circle = newMemberList;
         setUserData(newUserData);
+        localStorage.setItem("userData", JSON.stringify(newUserData));
       })
       .catch((error) => {
         console.log(error);
@@ -228,6 +231,7 @@ function App() {
         }
         editedUserData.circle = newMemberList;
         setUserData(editedUserData);
+        localStorage.setItem("userData", JSON.stringify(editedUserData));
       })
       .catch((error) => {
         console.log(error);
@@ -235,81 +239,57 @@ function App() {
   };
 
   // ------------------------- Rendering ---------------------- //
-  if (!loggedIn) {
-    return (
-      <BrowserRouter>
-        <PublicHeader />
-        <main>
-          <Routes>
-            {" "}
-            <Route path="/" element={<LandingPage />} exact></Route>
-            <Route
-              path="/login"
-              element={<LoginPage loginUser={loginUser} loggedIn={loggedIn} />}
-            />
-            <Route
-              path="/signup"
-              element={
-                <SignUpPage createUser={createUser} loggedIn={loggedIn} />
-              }
-            />
-          </Routes>
-        </main>
-      </BrowserRouter>
-    );
-  } else {
-    return (
-      <BrowserRouter>
-        <Header
-          userName={userData.firstName}
-          logout={logout}
-          loggedIn={loggedIn}
-        />
-        <main>
-          <Routes>
-            <Route path="/" element={<LandingPage />} exact></Route>
-            <Route
-              path="/login"
-              element={<LoginPage loginUser={loginUser} loggedIn={loggedIn} />}
-            />
-            <Route
-              path="/signup"
-              element={
-                <SignUpPage createUser={createUser} loggedIn={loggedIn} />
-              }
-            />
-            <Route
-              path="/mytasks"
-              element={
-                <MyTasks
-                  taskData={userData.tasks}
-                  deleteTask={deleteTask}
-                  editTask={editTask}
-                  userName={userData.firstName}
-                />
-              }
-            />
-            <Route
-              path="/mycircle"
-              element={
-                <MyCirclePage
-                  memberData={userData.circle}
-                  editMember={editMember}
-                  deleteMember={deleteMember}
-                />
-              }
-            />
-            <Route path="/addtask" element={<AddTask addTask={addTask} />} />
-            <Route
-              path="/addmember"
-              element={<AddMember addMember={addMember} />}
-            />
-          </Routes>
-        </main>
-        <Footer />
-      </BrowserRouter>
-    );
-  }
+
+  return (
+    <BrowserRouter>
+      <Header
+        userName={userData.firstName}
+        logout={logout}
+        loggedIn={loggedIn}
+      />
+      <main>
+        <Routes>
+          <Route path="/" element={<LandingPage />} exact></Route>
+          <Route
+            path="/login"
+            element={<LoginPage loginUser={loginUser} loggedIn={loggedIn} />}
+          />
+          <Route
+            path="/signup"
+            element={<SignUpPage createUser={createUser} loggedIn={loggedIn} />}
+          />
+          <Route path="/guestlogin" element={<GuestLogin />} />
+          <Route
+            path="/mytasks"
+            element={
+              <MyTasks
+                taskData={userData.tasks}
+                deleteTask={deleteTask}
+                editTask={editTask}
+                userName={userData.firstName}
+              />
+            }
+          />
+          <Route
+            path="/mycircle"
+            element={
+              <MyCirclePage
+                memberData={userData.circle}
+                editMember={editMember}
+                deleteMember={deleteMember}
+              />
+            }
+          />
+          <Route path="/addtask" element={<AddTask addTask={addTask} />} />
+          <Route
+            path="/addmember"
+            element={<AddMember addMember={addMember} />}
+          />
+        </Routes>
+      </main>
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
 export default App;
