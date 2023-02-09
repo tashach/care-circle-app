@@ -29,7 +29,7 @@ const Header = ({ userName, logout, loggedIn }) => {
             <NavDropdown title={`${userName}`} id="basic-nav-dropdown">
               <NavDropdown.Item href="/addtask">Add Item</NavDropdown.Item>
               <NavDropdown.Item href="/addmember">Add Member</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item href="/guestview">Guest View</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4" onClick={handleLogout}>
                 Logout

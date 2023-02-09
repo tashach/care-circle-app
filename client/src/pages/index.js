@@ -7,6 +7,7 @@ import LoginPage from "./LoginPage";
 import MyCirclePage from "./MyCirclePage";
 import MyTasks from "./MyTasks";
 import SignUpPage from "./SignUpPage";
+import GuestViewPage from "./GuestViewPage";
 
 export {
   ErrorPage,
@@ -17,5 +18,6 @@ export {
   LoginPage,
   MyCirclePage,
   MyTasks,
+  GuestViewPage,
   SignUpPage,
 };

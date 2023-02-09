@@ -7,6 +7,7 @@ import {
   AddTask,
   AddMember,
   GuestLogin,
+  GuestViewPage,
   LandingPage,
   MyCirclePage,
   MyTasks,
@@ -49,9 +50,10 @@ function App() {
         const userAPICopy = { ...response.data };
         console.log("Calling API", userAPICopy);
         setUserData(userAPICopy);
-        sessionStorage.setItem("token", JSON.stringify(response.data.token));
-        localStorage.setItem("userData", JSON.stringify(response.data));
-        setLoggedIn(true);
+        console.log("user data", userData);
+        // sessionStorage.setItem("token", JSON.stringify(response.data.token));
+        // localStorage.setItem("userData", JSON.stringify(response.data));
+        // setLoggedIn(true);
       })
       .catch((error) => {
         console.log(error);
@@ -289,6 +291,16 @@ function App() {
             element={<AddMember addMember={addMember} />}
           />
           <Route path="*" element={<ErrorPage />} />
+          <Route
+            path="/guestview"
+            element={
+              <GuestViewPage
+                taskData={userData.tasks}
+                userName={userData.firstName}
+                editTask={editTask}
+              />
+            }
+          />
         </Routes>
       </main>
       <Footer />
