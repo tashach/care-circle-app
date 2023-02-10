@@ -3,21 +3,29 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/db");
+// const notFoundMiddleware = require("./middleware/not-found");
+// const errorHandlerMiddleWare = require("./middleware/error-handler");
 const app = express();
 const user = require("./routes/user");
-const { response } = require("express");
 
+// db and authenticateUser
 connectDB();
 
 app.use(cors({ origin: true, credentials: true }));
 
-// initialize middleware
+//middleware
+
+// this allows json data to be available
 app.use(express.json({ extended: false }));
 // app.get("/", (req, res) => res.send("Server up and running"));
 app.use(function (req, res, next) {
+  // res.setHeader(
+  //   "Content-Security-Policy",
+  //   "default-src 'self''unsafe-inline'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; frame-src 'self'; connect-src 'self'; style-src-elem 'self'; manifest-src 'self';"
+  // );
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-src 'self'; connect-src 'self' 'http://localhost:5000/api/user/63d013fc80b92d424dd68e23';"
+    "default-src 'self'; font-src 'self' 'fonts.gstatic.com'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'fonts.googleapis.com' 'unsafe-inline'; frame-src 'self'; connect-src 'self' 'http://localhost:5000/api/user/63d013fc80b92d424dd68e23';"
   );
   res.setHeader(
     "Access-Control-Allow-Origin",
@@ -25,9 +33,10 @@ app.use(function (req, res, next) {
   );
   next();
 });
+// app.use(notFoundMiddleware);
+// app.use(errorHandlerMiddleWare);
 app.use("/api/user", user);
 
-// setting up port
 const PORT = process.env.PORT || 5000;
 
 //----------deployment-------------//

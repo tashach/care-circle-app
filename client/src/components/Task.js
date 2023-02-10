@@ -1,8 +1,8 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import "./styles/Task.css";
-import { Button, Card, Badge, Row, Col, Form } from "react-bootstrap";
+import "../styles/Task.css";
+import { Button, Card, Row, Col, Form } from "react-bootstrap";
 
 const Task = ({
   _id,
@@ -59,7 +59,7 @@ const Task = ({
   };
 
   return (
-    <Card style={{ margin: 10 }} className="w-75 p-3">
+    <Card style={{ margin: 10 }} className="w-75 p-3 shadow-sm">
       <Card.Title style={{ display: "flex" }}>
         <div className="form-check">
           <input
@@ -75,6 +75,7 @@ const Task = ({
           />
           <label className="form-check-label" htmlFor="flexCheckDefault" />
         </div>
+        <h4 className="text-primary mt-2 ">{date}</h4>
         <span
           style={{
             color: "black",
@@ -85,9 +86,6 @@ const Task = ({
             marginLeft: 10,
           }}
         >
-          <Badge className="mx-2" bg="info">
-            {date}
-          </Badge>
           {title}
         </span>
         <div>
@@ -102,13 +100,13 @@ const Task = ({
       </Card.Title>
       <Card.Body>
         <blockquote className="blockquote mb-0">
-          <p style={{ color: "black", fontSize: 18 }}>{description}</p>
+          <p style={{ color: "black", fontSize: 18 }}>{volunteerName}</p>
           <footer
             style={{ fontSize: 16 }}
             id="blockquote-footer"
             className="blockquote-footer"
           >
-            <cite title="Source Title">{volunteerName}</cite>
+            <cite title="Source Title">{description}</cite>
           </footer>
         </blockquote>
       </Card.Body>

@@ -43,7 +43,7 @@ const NewMemberForm = ({ addMember }) => {
 
   return (
     <div>
-      <Form>
+      <Form className="w-75">
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="firstName">
@@ -98,7 +98,7 @@ const NewMemberForm = ({ addMember }) => {
         </Row>
         <Row>
           <Col>
-            <p>
+            <p className="my-5">
               To invite someone to your circle, send them the link and invite
               code. They should be good to go from there!{" "}
             </p>

@@ -42,7 +42,7 @@ const NewTaskForm = ({ addTask }) => {
     }
   };
   return (
-    <div className={`addTaskContainer`}>
+    <div className={`addTaskContainer w-75`}>
       <Form>
         <Row>
           <Col>

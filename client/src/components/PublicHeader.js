@@ -1,5 +1,5 @@
 import { Container, Navbar } from "react-bootstrap";
-import "./styles/Header.css";
+import "../styles/Header.css";
 
 const PublicHeader = ({ userName, logout, loggedIn }) => {
   return (

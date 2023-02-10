@@ -603,9 +603,9 @@ progress {
   font-size: 0.875em;
   color: #888;
 }
-.blockquote-footer::before {
-  content:;
-}
+/* .blockquote-footer::before { */
+  /* content:; */
+/* } */
 
 .img-fluid {
   max-width: 100%;
