@@ -1,5 +1,6 @@
 import Mainscreen from "../components/Mainscreen";
 import "../styles/Mainscreen.css";
+import PublicHeader from "../components/PublicHeader";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
@@ -56,89 +57,92 @@ const SignUpPage = ({ createUser }) => {
   };
 
   return (
-    <Mainscreen title="SIGN UP">
-      <div className="loginContainer">
-        <Form onSubmit={onSubmit}>
-          {showAlert && <AlertItem />}
-          <Row>
+    <div>
+      <PublicHeader />
+      <Mainscreen title="SIGN UP">
+        <div className="loginContainer w-75">
+          <Form onSubmit={onSubmit}>
+            {showAlert && <AlertItem />}
+            <Row>
+              <Col>
+                <Form.Group className="mb-3" controlId="firstName">
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter First Name"
+                    name="firstName"
+                    value={values.firstName}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3" controlId="lastName">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Last Name"
+                    name="lastName"
+                    value={values.lastName}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                  />
+                  <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                  </Form.Text>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Form.Group className="mb-3" controlId="confirmPassword">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                value={values.confirmPassword}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Button variant="primary" type="submit">
+              Create Account
+            </Button>
+          </Form>
+          <Row className="py-3">
             <Col>
-              <Form.Group className="mb-3" controlId="firstName">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter First Name"
-                  name="firstName"
-                  value={values.firstName}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3" controlId="lastName">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Last Name"
-                  name="lastName"
-                  value={values.lastName}
-                  onChange={handleChange}
-                />
-              </Form.Group>
+              Have an account? <Link to="/login">Login Here</Link>
             </Col>
           </Row>
-
-          <Row>
-            <Col>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Enter email"
-                  name="email"
-                  value={values.email}
-                  onChange={handleChange}
-                />
-                <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={values.password}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Form.Group className="mb-3" controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm Password"
-              name="confirmPassword"
-              value={values.confirmPassword}
-              onChange={handleChange}
-            />
-          </Form.Group>
-
-          <Button variant="primary" type="submit">
-            Create Account
-          </Button>
-        </Form>
-        <Row className="py-3">
-          <Col>
-            Have an account? <Link to="/login">Login Here</Link>
-          </Col>
-        </Row>
-      </div>
-    </Mainscreen>
+        </div>
+      </Mainscreen>
+    </div>
   );
 };
 

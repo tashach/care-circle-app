@@ -90,100 +90,63 @@ const GuestTask = ({
           {title}
         </span>
         <div>
-          <Button
-            size="sm"
-            variant="warning"
-            onClick={() => setIsHidden(!isHidden)}
-          >
+          <Button variant="warning" onClick={() => setIsHidden(!isHidden)}>
             I can help with this!
           </Button>
         </div>
       </Card.Title>
-      <Card.Body>
-        <blockquote className="blockquote mb-0">
-          <p style={{ color: "black", fontSize: 18 }}>{volunteerName}</p>
-          <footer
-            style={{ fontSize: 16 }}
-            id="blockquote-footer"
-            className="blockquote-footer"
-          >
-            <cite title="Source Title">{description}</cite>
-          </footer>
-        </blockquote>
-      </Card.Body>
-      <div className={`editTaskContainer ${displayClass}`}>
-        <Form style={{ margin: 10 }}>
-          <Row>
-            <Col>
-              <Form.Group className="mb-3" controlId="title">
-                <Form.Label>Title</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="title"
-                  placeholder="title"
-                  value={taskFormData.title}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3" controlId="volunteerName">
-                <Form.Label>Circle Member</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="volunteerName"
-                  placeholder="Circle Member"
-                  value={taskFormData.volunteerName}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group className="mb-3" controlId="date">
-                <Form.Label>Due Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  name="date"
-                  placeholder="Due Date"
-                  value={taskFormData.date}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row>
-            <Form.Group className="mb-3" controlId="description">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                type="text"
-                name="description"
-                placeholder="Description"
-                as="textarea"
-                rows={3}
-                value={taskFormData.description}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Row>
-          <div className="buttonContainer d-flex flew-row justify-content-end">
-            <Button
-              onClick={handleEditTaskSubmit}
-              className="mx-2"
-              variant="success"
-              size="sm"
+      <Card.Body className="d-flex">
+        <Col>
+          {" "}
+          <blockquote className="blockquote mb-0">
+            <p style={{ color: "black", fontSize: 18 }}>{volunteerName}</p>
+            <footer
+              style={{ fontSize: 16 }}
+              id="blockquote-footer"
+              className="blockquote-footer"
             >
-              Save Changes
-            </Button>
-            <Button
-              size="sm"
-              onClick={handleDiscardChanges}
-              variant="outline-secondary"
-            >
-              Discard Changes
-            </Button>
+              <cite title="Source Title">{description}</cite>
+            </footer>
+          </blockquote>
+        </Col>
+        <Col>
+          <div className={`editTaskContainer ${displayClass}`}>
+            <Form style={{ margin: 10 }}>
+              <Row>
+                <Form.Group className="mb-3" controlId="title">
+                  <Form.Label>Enter Your Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="volunteerName"
+                    placeholder="Your Name Here"
+                    value={taskFormData.volunteerName}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Row>
+              <Row>
+                <div className="buttonContainer d-flex flew-row justify-content-end">
+                  <Button
+                    onClick={handleEditTaskSubmit}
+                    className="mx-2"
+                    variant="success"
+                    size="sm"
+                  >
+                    Save
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={handleDiscardChanges}
+                    variant="outline-secondary"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </Row>
+            </Form>
           </div>
-        </Form>
-      </div>
+        </Col>
+      </Card.Body>
     </Card>
   );
 };

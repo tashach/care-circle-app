@@ -5,9 +5,11 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Task from "../components/Task";
 import CompletedTask from "../components/CompletedTask";
+import Header from "../components/Header";
+
 import "../styles/TaskList.css";
 
-const MyTasks = ({ deleteTask, editTask, taskData, userName }) => {
+const MyTasks = ({ deleteTask, editTask, taskData, userName, logout }) => {
   console.log(taskData);
 
   const [isHidden, setIsHidden] = useState(true);
@@ -50,30 +52,33 @@ const MyTasks = ({ deleteTask, editTask, taskData, userName }) => {
     }
   });
   return (
-    <Mainscreen title={`Welcome Back, ${userName}!`}>
-      <Link to="/addtask">
-        <Button
-          variant="info"
-          className="addButton"
-          style={{ marginLeft: 10, marginBottom: 6 }}
-        >
-          + Add New Item
-        </Button>
-      </Link>
-      <Form className="mx-3 my-3">
-        <Form.Check
-          type="switch"
-          id="custom-switch"
-          label="Show Completed"
-          onClick={() => setIsHidden(!isHidden)}
-        />
-      </Form>
-      {taskComponents}
-      <div className={displayClass}>
-        <p className="mx-2"></p>
-        {completedTaskComponents}
-      </div>
-    </Mainscreen>
+    <div>
+      <Header logout={logout} />
+      <Mainscreen title={`Welcome Back, ${userName}!`}>
+        <Link to="/addtask">
+          <Button
+            variant="info"
+            className="addButton"
+            style={{ marginLeft: 10, marginBottom: 6 }}
+          >
+            + Add New Item
+          </Button>
+        </Link>
+        <Form className="mx-3 my-3">
+          <Form.Check
+            type="switch"
+            id="custom-switch"
+            label="Show Completed"
+            onClick={() => setIsHidden(!isHidden)}
+          />
+        </Form>
+        {taskComponents}
+        <div className={displayClass}>
+          <p className="mx-2"></p>
+          {completedTaskComponents}
+        </div>
+      </Mainscreen>
+    </div>
   );
 };
 

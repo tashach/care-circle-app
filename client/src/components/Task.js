@@ -2,7 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import "../styles/Task.css";
-import { Button, Card, Badge, Row, Col, Form } from "react-bootstrap";
+import { Button, Card, Row, Col, Form } from "react-bootstrap";
 
 const Task = ({
   _id,
@@ -75,6 +75,7 @@ const Task = ({
           />
           <label className="form-check-label" htmlFor="flexCheckDefault" />
         </div>
+        <h4 className="text-primary mt-2 ">{date}</h4>
         <span
           style={{
             color: "black",
@@ -85,9 +86,6 @@ const Task = ({
             marginLeft: 10,
           }}
         >
-          <Badge className="mx-2" bg="info">
-            {date}
-          </Badge>
           {title}
         </span>
         <div>

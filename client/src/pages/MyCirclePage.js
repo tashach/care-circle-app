@@ -3,10 +3,11 @@ import "../styles/Mainscreen.css";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Member from "../components/Member";
+import Header from "../components/Header";
 import "../styles/TaskList.css";
 // import { useEffect, useState } from "react";
 
-const MyCirclePage = ({ deleteMember, editMember, memberData }) => {
+const MyCirclePage = ({ deleteMember, editMember, memberData, logout }) => {
   console.log(memberData);
 
   const memberComponents = memberData?.map((member) => {
@@ -25,18 +26,21 @@ const MyCirclePage = ({ deleteMember, editMember, memberData }) => {
     );
   });
   return (
-    <Mainscreen title="My Circle">
-      <Link to="/addmember">
-        <Button
-          variant="info"
-          className="addButton"
-          style={{ marginLeft: 10, marginBottom: 6 }}
-        >
-          + Invite Someone
-        </Button>
-      </Link>
-      {memberComponents}
-    </Mainscreen>
+    <div>
+      <Header logout={logout} />
+      <Mainscreen title="My Circle">
+        <Link to="/addmember">
+          <Button
+            variant="info"
+            className="addButton"
+            style={{ marginLeft: 10, marginBottom: 6 }}
+          >
+            + Invite Someone
+          </Button>
+        </Link>
+        {memberComponents}
+      </Mainscreen>
+    </div>
   );
 };
 

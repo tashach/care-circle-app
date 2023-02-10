@@ -1,11 +1,15 @@
 import Mainscreen from "../components/Mainscreen";
 import NewMemberForm from "../components/NewMemberForm";
+import Header from "../components/Header";
 
-const AddMember = ({ addMember }) => {
+const AddMember = ({ addMember, logout }) => {
   return (
-    <Mainscreen title="Add to My Circle">
-      <NewMemberForm addMember={addMember}></NewMemberForm>
-    </Mainscreen>
+    <div>
+      <Header logout={logout} />
+      <Mainscreen title="Add to My Circle">
+        <NewMemberForm addMember={addMember}></NewMemberForm>
+      </Mainscreen>
+    </div>
   );
 };
 

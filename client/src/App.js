@@ -1,6 +1,4 @@
 import "./App.css";
-import Header from "./components/Header";
-import PublicHeader from "./components/PublicHeader";
 import Footer from "./components/Footer";
 import {
   ErrorPage,
@@ -18,10 +16,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
-// import "@fontsource/roboto/300.css";
-// import "@fontsource/roboto/400.css";
-// import "@fontsource/roboto/500.css";
-// import "@fontsource/roboto/700.css";
 
 function App() {
   const [userData, setUserData] = useState({});
@@ -40,8 +34,6 @@ function App() {
 
   const URL = "/api/user";
 
-  // const USER_ID = "63d013fc80b92d424dd68e23";
-
   const loginUser = (email, password, config) => {
     console.log("calling LoginUser with", email, password);
     axios
@@ -50,28 +42,14 @@ function App() {
         const userAPICopy = { ...response.data };
         console.log("Calling API", userAPICopy);
         setUserData(userAPICopy);
-        console.log("user data", userData);
-        // sessionStorage.setItem("token", JSON.stringify(response.data.token));
-        // localStorage.setItem("userData", JSON.stringify(response.data));
+        sessionStorage.setItem("token", JSON.stringify(response.data.token));
+        localStorage.setItem("userData", JSON.stringify(response.data));
         // setLoggedIn(true);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
-  // const fetchUserData = (URL, USER_ID) => {
-  //   axios
-  //     .get(`${URL}/${USER_ID}`)
-  //     .then((response) => {
-  //       const userAPICopy = { ...response.data };
-  //       console.log("Calling API");
-  //       setUserData(userAPICopy);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
 
   const createUser = (firstName, lastName, email, password, config) => {
     console.log(
@@ -247,11 +225,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header
-        userName={userData.firstName}
-        logout={logout}
-        loggedIn={loggedIn}
-      />
       <main>
         <Routes>
           <Route path="/" element={<LandingPage />} exact></Route>
@@ -272,6 +245,7 @@ function App() {
                 deleteTask={deleteTask}
                 editTask={editTask}
                 userName={userData.firstName}
+                logout={logout}
               />
             }
           />
@@ -282,6 +256,7 @@ function App() {
                 memberData={userData.circle}
                 editMember={editMember}
                 deleteMember={deleteMember}
+                logout={logout}
               />
             }
           />
@@ -298,6 +273,7 @@ function App() {
                 taskData={userData.tasks}
                 userName={userData.firstName}
                 editTask={editTask}
+                logout={logout}
               />
             }
           />

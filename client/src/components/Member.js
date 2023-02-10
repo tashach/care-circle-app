@@ -49,8 +49,8 @@ const Member = ({
   };
 
   return (
-    <Card style={{ margin: 10 }} className="w-75">
-      <Card.Header style={{ display: "flex" }}>
+    <Card style={{ margin: 10 }} className="w-75 p-3 shadow-sm">
+      <Card.Title style={{ display: "flex" }}>
         <span
           style={{
             color: "black",
@@ -81,7 +81,7 @@ const Member = ({
             Remove
           </Button>
         </div>
-      </Card.Header>
+      </Card.Title>
       <Card.Body>
         <blockquote className="blockquote mb-0" style={{ marginLeft: 10 }}>
           <p style={{ color: "black", fontSize: 18 }}>{email}</p>
@@ -99,7 +99,7 @@ const Member = ({
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="firstName">
-                <Form.Label>Title</Form.Label>
+                <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
                   name="memberFirstName"

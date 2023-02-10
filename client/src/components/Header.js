@@ -2,7 +2,7 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Header.css";
 
-const Header = ({ userName, logout, loggedIn }) => {
+const Header = ({ userName, logout }) => {
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
@@ -19,14 +19,14 @@ const Header = ({ userName, logout, loggedIn }) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
-          <Nav className="m-auto">
+          <Nav className="mr-10">
             <Nav.Link className="navLink" href="/mytasks">
-              Items
+              My Items
             </Nav.Link>
             <Nav.Link className="navLink" href="/mycircle">
               My Circle
             </Nav.Link>
-            <NavDropdown title={`${userName}`} id="basic-nav-dropdown">
+            <NavDropdown title="Menu" id="basic-nav-dropdown">
               <NavDropdown.Item href="/addtask">Add Item</NavDropdown.Item>
               <NavDropdown.Item href="/addmember">Add Member</NavDropdown.Item>
               <NavDropdown.Item href="/guestview">Guest View</NavDropdown.Item>
