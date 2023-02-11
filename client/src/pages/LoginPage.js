@@ -36,7 +36,7 @@ const Login = ({ loginUser }) => {
       return;
     }
     console.log(values);
-    const currentUser = { email, password };
+
     try {
       const config = { headers: { "Content-type": "application/json" } };
       loginUser(email, password, config);

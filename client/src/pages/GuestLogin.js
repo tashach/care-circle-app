@@ -6,20 +6,32 @@ import { useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
 import { useState } from "react";
 
-const GuestLogin = ({ loginUser, loggedIn }) => {
-  const [email, setEmail] = useState("");
-  const [inviteCode, setInviteCode] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  // const [error, setError] = useState(false);
+const INITIAL_FORM_STATE = {
+  inviteCode: "",
+  email: "",
+};
+
+const GuestLogin = ({ loginMember }) => {
+  const [values, setValues] = useState(INITIAL_FORM_STATE);
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    console.log("Handle Change Called");
+    const newFormData = {
+      ...values,
+      [e.target.name]: e.target.value,
+    };
+    setValues(newFormData);
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("calling handleFormSubmit login");
+    console.log("calling handleFormSubmit loginMember");
     try {
       const config = { headers: { "Content-type": "application/json" } };
-      loginUser(email, inviteCode, config);
-      navigate("/mytasks");
+      const { email, inviteCode } = values;
+      loginMember(email, inviteCode, config);
+      navigate("/guestview");
     } catch (error) {
       console.log(e);
       throw new Error("whoops! something went wrong");
@@ -38,31 +50,30 @@ const GuestLogin = ({ loginUser, loggedIn }) => {
           </Row>
           <Form onSubmit={handleFormSubmit}>
             <Row>
-              {/* <Form.Text className="text-muted">Enter your email here.</Form.Text> */}
               <Col>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>First Name</Form.Label>
+                  <Form.Label>Their Email</Form.Label>
                   <Form.Control
                     type="test"
-                    name="firstName"
-                    placeholder="First Name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    name="email"
+                    placeholder="Their Email"
+                    value={values.email}
+                    onChange={handleChange}
                   />
                 </Form.Group>
               </Col>
-              <Col>
+              {/* <Col>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Last Name</Form.Label>
                   <Form.Control
                     type="text"
                     name="lastName"
                     placeholder="Last Name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    value={values.lastName}
+                    onChange={handleChange}
                   />
                 </Form.Group>
-              </Col>
+              </Col> */}
             </Row>
             <Form.Group className="mb-3 mt-5" controlId="formBasicPassword">
               <Form.Label>Your Invite Code</Form.Label>
@@ -70,22 +81,23 @@ const GuestLogin = ({ loginUser, loggedIn }) => {
                 type="inviteCode"
                 placeholder="Invite Code"
                 name="inviteCode"
-                value={inviteCode}
-                onChange={(e) => setInviteCode(e.target.value)}
+                value={values.inviteCode}
+                onChange={handleChange}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            {/* <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Your Email</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Your Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                value={values.email}
+                onChange={handleChange}
               />
               <Form.Text className="text-muted">
                 Enter your email here.
               </Form.Text>
-            </Form.Group>
+            </Form.Group> */}
 
             <Button variant="primary" type="submit">
               Submit

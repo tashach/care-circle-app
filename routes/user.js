@@ -13,6 +13,7 @@ const {
   deleteTask,
   updateTask,
   addMember,
+  loginMember,
   deleteMember,
   updateMember,
 } = require("../controllers/user");
@@ -86,6 +87,13 @@ router.put("/task/:id", updateTask);
  * @access public
  */
 router.post("/circle/:id", addMember);
+
+/**
+ * @route POST /loginmember
+ * @description loginMember
+ * @access public
+ */
+router.post("/guestlogin", loginMember);
 
 /**
  * @route DELETE /circle/:id
