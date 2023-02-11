@@ -5,6 +5,18 @@ const asyncHandler = require("express-async-handler");
 const generateToken = require("../utils/generateToken");
 var ObjectId = require("mongodb").ObjectId;
 
+const characters =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+const generateString = (length) => {
+  let result = "";
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
+
 exports.getAllUsers = (req, res) => {
   User.find()
     .then((user) => res.json(user))
@@ -23,24 +35,31 @@ exports.getOneUser = (req, res) => {
 
 exports.postCreateUser = asyncHandler(async (req, res) => {
   console.log("calling create user");
+  const inviteCode = generateString(6);
   const userExists = await User.findOne({ email: req.body.email });
   if (userExists) {
     res.status(400).json({ message: "User Already Exists" });
     throw new Error("User Already Exists");
   }
   try {
-    const user = await User.create(req.body);
+    const user = await User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      inviteCode: inviteCode,
+    });
     user.save();
     const token = generateToken(user._id);
+
     res.status(201).json({
       _id: user._id.toString(),
       firstName: user.firstName,
       lastName: user.lastName,
-      // password: user.password,
       token: token,
+      inviteCode: user.inviteCode,
       circle: [],
       tasks: [],
-      inviteCode: "",
     });
   } catch (error) {
     res.status(500).json({ msg: "error, user not created" });
@@ -60,7 +79,7 @@ exports.login = asyncHandler(async (req, res) => {
       token: token,
       circle: user.circle,
       tasks: user.tasks,
-      inviteCode: "",
+      inviteCode: user.inviteCode,
     });
   } else {
     res.status(400).json({ message: "Incorrect email or password" });
@@ -151,6 +170,7 @@ exports.deleteTask = (req, res) => {
 };
 // ------------------------- Member Routes ---------------------- //
 exports.addMember = (req, res) => {
+  console.log("callingAddMember");
   const newMember = new Member(req.body);
   newMember.save();
 
@@ -161,15 +181,35 @@ exports.addMember = (req, res) => {
     (err) => {
       if (err) {
         res.status(400).json({ message: "error" });
+      } else {
+        res.json({
+          message: `successfully added circle member ${newMember.memberFirstName}`,
+          _id: newMember._id,
+        });
       }
-
-      res.json({
-        message: `successfully added circle member ${newMember.memberFirstName}`,
-        _id: newMember._id,
-      });
     }
   );
 };
+
+exports.loginMember = asyncHandler(async (req, res) => {
+  console.log("loginMember request body", req.body.email);
+  const user = await User.findOne({
+    email: req.body.email,
+  });
+  if (user && (await user.matchInviteCode(req.body.inviteCode))) {
+    res.json({
+      _id: user._id.toString(),
+      firstName: user.firstName,
+      lastName: user.lastName,
+      circle: user.circle,
+      tasks: user.tasks,
+      inviteCode: user.inviteCode,
+    });
+  } else {
+    res.status(400).json({ message: "Invalid email or password" });
+    throw new Error("Incorrect email or password");
+  }
+});
 
 exports.deleteMember = (req, res) => {
   const memberId = new ObjectId(req.params.memberId);

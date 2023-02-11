@@ -76,7 +76,6 @@ function App() {
         console.log("Calling API", userAPICopy);
         sessionStorage.setItem("token", userData.token);
         setUserData(userAPICopy);
-        console.log("user data", userData);
         localStorage.setItem("userData", JSON.stringify(response.data));
       })
       .catch((error) => {
@@ -177,6 +176,29 @@ function App() {
       });
   };
 
+  const loginMember = (email, inviteCode, config) => {
+    console.log("calling LoginMember with", email, inviteCode);
+    axios
+      .post(
+        `${URL}/guestlogin`,
+        {
+          email: email,
+          inviteCode: inviteCode,
+        },
+        config
+      )
+      .then((response) => {
+        const userAPICopy = { ...response.data };
+        console.log("Calling API", userAPICopy);
+        setUserData(userAPICopy);
+        sessionStorage.setItem("token", JSON.stringify(response.data.token));
+        localStorage.setItem("userData", JSON.stringify(response.data));
+        // setLoggedIn(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const deleteMember = (memberId) => {
     console.log("Calling deleteMember");
     axios
@@ -236,7 +258,10 @@ function App() {
             path="/signup"
             element={<SignUpPage createUser={createUser} loggedIn={loggedIn} />}
           />
-          <Route path="/guestlogin" element={<GuestLogin />} />
+          <Route
+            path="/guestlogin"
+            element={<GuestLogin loginMember={loginMember} />}
+          />
           <Route
             path="/mytasks"
             element={
@@ -263,7 +288,13 @@ function App() {
           <Route path="/addtask" element={<AddTask addTask={addTask} />} />
           <Route
             path="/addmember"
-            element={<AddMember addMember={addMember} />}
+            element={
+              <AddMember
+                addMember={addMember}
+                inviteCode={userData.inviteCode}
+                logout={logout}
+              />
+            }
           />
           <Route path="*" element={<ErrorPage />} />
           <Route

@@ -12,7 +12,7 @@ const INITIAL_FORM_STATE = {
   memberTasks: [],
 };
 
-const NewMemberForm = ({ addMember }) => {
+const NewMemberForm = ({ addMember, inviteCode }) => {
   const [memberFormData, setMemberFormData] = useState(INITIAL_FORM_STATE);
   const navigate = useNavigate();
 
@@ -102,16 +102,19 @@ const NewMemberForm = ({ addMember }) => {
               To invite someone to your circle, send them the link and invite
               code. They should be good to go from there!{" "}
             </p>
-            <Card style={{ width: "18rem" }}>
+            <Card className="w-100">
               <Card.Body>
                 <Card.Title>Link and Invite Code</Card.Title>
+                <Card.Text className="text-info">Link:</Card.Text>
                 <Card.Text className="text-secondary">
-                  LINK: https://care-circle-app.herokuapp.com
+                  https://care-circle-app.herokuapp.com
                 </Card.Text>
-                <Card.Text className="text-secondary">
-                  INVITE CODE: TEST@1555
+                <Card.Text className="text-info">Invite Code:</Card.Text>
+                <Card.Text className="text-secondary mt-3">
+                  {inviteCode}
                 </Card.Text>
                 <Button
+                  className=""
                   onClick={() => {
                     navigator.clipboard.writeText(invite);
                   }}
