@@ -1,5 +1,7 @@
 # Care Circle
 
+Care Circle is a project I created as my Capstone for Ada Developer's Academy. I decided to use a MERN stack to challenge myself to learn some new technologies. It's been a lot of fun! 
+
 Have you ever wondered how you can help a loved one who has recently had undergone a surgery, given birth, or is mourning a loss? 
 
 Care Circle provides a way to communicate to your loved ones about ways that they can support you or someone else during times of need. It reduces the mental load for the user to remember who has offered to help you and with what. Members of the user's circle can volunteer for tasks without needing to contact the user directly.
