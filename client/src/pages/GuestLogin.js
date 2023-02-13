@@ -5,6 +5,8 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
 import { useState } from "react";
+import AlertItem from "../components/AlertItem";
+import { useAppContext } from "../context/AppContext";
 
 const INITIAL_FORM_STATE = {
   inviteCode: "",
@@ -14,6 +16,7 @@ const INITIAL_FORM_STATE = {
 const GuestLogin = ({ loginMember }) => {
   const [values, setValues] = useState(INITIAL_FORM_STATE);
   const navigate = useNavigate();
+  const { isLoading, showAlert, displayAlert } = useAppContext();
 
   const handleChange = (e) => {
     console.log("Handle Change Called");
@@ -30,6 +33,10 @@ const GuestLogin = ({ loginMember }) => {
     try {
       const config = { headers: { "Content-type": "application/json" } };
       const { email, inviteCode } = values;
+      if (!email || !inviteCode) {
+        displayAlert();
+        return;
+      }
       loginMember(email, inviteCode, config);
       navigate("/guestview");
     } catch (error) {
@@ -49,6 +56,7 @@ const GuestLogin = ({ loginMember }) => {
             </Col>
           </Row>
           <Form onSubmit={handleFormSubmit}>
+            {showAlert && <AlertItem />}
             <Row>
               <Col>
                 <Form.Group className="mb-3" controlId="formBasicEmail">

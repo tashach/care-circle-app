@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Row, Col, Form, Button, Card } from "react-bootstrap";
+import AlertItem from "../components/AlertItem";
+import { useAppContext } from "../context/AppContext";
 
 const INITIAL_FORM_STATE = {
   memberFirstName: "",
@@ -16,6 +18,8 @@ const NewMemberForm = ({ addMember, inviteCode }) => {
   const [memberFormData, setMemberFormData] = useState(INITIAL_FORM_STATE);
   const navigate = useNavigate();
 
+  const { isLoading, showAlert, displayAlert } = useAppContext();
+
   const handleChange = (e) => {
     console.log("Handle Change Called");
     const value = e.target.value;
@@ -28,6 +32,12 @@ const NewMemberForm = ({ addMember, inviteCode }) => {
 
   const handleNewMemberSubmit = (e) => {
     e.preventDefault();
+    const { memberFirstName, memberLastName, memberEmail, memberPhone } =
+      memberFormData;
+    if (!memberFirstName || !memberLastName || !memberEmail || !memberPhone) {
+      displayAlert();
+      return;
+    }
     addMember(memberFormData);
     setMemberFormData(INITIAL_FORM_STATE);
     navigate("/mycircle");
@@ -44,6 +54,7 @@ const NewMemberForm = ({ addMember, inviteCode }) => {
   return (
     <div>
       <Form className="w-75">
+        {showAlert && <AlertItem />}
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="firstName">
