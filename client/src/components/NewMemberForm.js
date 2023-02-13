@@ -53,9 +53,6 @@ const NewMemberForm = ({ addMember, inviteCode }) => {
     navigate("/mycircle");
   };
 
-  const invite =
-    "LINK: https://care-circle-app.herokuapp.com \nINVITE CODE: TEST@1555";
-
   return (
     <div>
       <Form className="w-75">
@@ -132,7 +129,7 @@ const NewMemberForm = ({ addMember, inviteCode }) => {
                 <Button
                   className=""
                   onClick={() => {
-                    navigator.clipboard.writeText(invite);
+                    navigator.clipboard.writeText(inviteCode);
                   }}
                 >
                   Copy
