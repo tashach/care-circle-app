@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
   // );
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self'; font-src 'self' 'fonts.gstatic.com'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'fonts.googleapis.com' 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Roboto:wght@100;300;400&family=Work+Sans:wght@200&display=swap' 'unsafe-inline'; frame-src 'self'; connect-src 'self' 'http://localhost:5000/api/user/63d013fc80b92d424dd68e23';"
+    "default-src 'self'; font-src 'self' fonts.gstatic.com; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; frame-src 'self'; connect-src 'self' 'http://localhost:5000/api/user/63d013fc80b92d424dd68e23';"
   );
   res.setHeader(
     "Access-Control-Allow-Origin",
