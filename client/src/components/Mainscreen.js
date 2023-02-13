@@ -1,4 +1,5 @@
 import { Container, Row } from "react-bootstrap";
+import PropTypes from "prop-types";
 import "../styles/Mainscreen.css";
 
 const Mainscreen = ({ title, children }) => {
@@ -22,3 +23,7 @@ const Mainscreen = ({ title, children }) => {
 };
 
 export default Mainscreen;
+
+Mainscreen.propTypes = {
+  title: PropTypes.string.isRequired,
+};

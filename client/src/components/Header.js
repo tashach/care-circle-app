@@ -1,8 +1,9 @@
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import "../styles/Header.css";
 
-const Header = ({ userName, logout }) => {
+const Header = ({ logout }) => {
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
@@ -43,3 +44,7 @@ const Header = ({ userName, logout }) => {
 };
 
 export default Header;
+
+Header.propTypes = {
+  logout: PropTypes.func.isRequired,
+};

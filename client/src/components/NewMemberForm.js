@@ -144,6 +144,7 @@ const NewMemberForm = ({ addMember, inviteCode }) => {
 
 NewMemberForm.propTypes = {
   addMember: PropTypes.func.isRequired,
+  inviteCode: PropTypes.string.isRequired,
 };
 
 export default NewMemberForm;
