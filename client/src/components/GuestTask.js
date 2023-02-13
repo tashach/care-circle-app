@@ -97,7 +97,12 @@ const GuestTask = ({
         <Col>
           {" "}
           <blockquote className="blockquote mb-0">
-            <p style={{ color: "black", fontSize: 18 }}>{volunteerName}</p>
+            <p
+              className="text-secondary"
+              style={{ fontSize: 18, fontWeight: "bold" }}
+            >
+              {volunteerName}
+            </p>
             <footer
               style={{ fontSize: 16 }}
               id="blockquote-footer"

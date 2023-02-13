@@ -285,7 +285,10 @@ function App() {
               />
             }
           />
-          <Route path="/addtask" element={<AddTask addTask={addTask} />} />
+          <Route
+            path="/addtask"
+            element={<AddTask addTask={addTask} logout={logout} />}
+          />
           <Route
             path="/addmember"
             element={

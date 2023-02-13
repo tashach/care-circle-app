@@ -2,7 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import "../styles/Task.css";
-import { Button, Card, Badge } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
 const CompletedTask = ({
   _id,
@@ -17,6 +17,7 @@ const CompletedTask = ({
     _id: _id,
     title: title,
     description: description,
+    date: date,
     volunteerName: volunteerName,
     isComplete: isComplete,
   };
@@ -56,9 +57,6 @@ const CompletedTask = ({
             marginLeft: 10,
           }}
         >
-          <Badge className="mx-2" bg="warning">
-            {date}
-          </Badge>
           {title}
         </span>
 
