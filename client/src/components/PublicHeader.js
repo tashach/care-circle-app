@@ -1,7 +1,7 @@
 import { Container, Navbar } from "react-bootstrap";
 import "../styles/Header.css";
 
-const PublicHeader = ({ userName, logout, loggedIn }) => {
+const PublicHeader = () => {
   return (
     <Navbar bg="primary" expand="lg">
       <Container>
