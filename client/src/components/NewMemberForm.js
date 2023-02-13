@@ -38,9 +38,14 @@ const NewMemberForm = ({ addMember, inviteCode }) => {
       displayAlert();
       return;
     }
-    addMember(memberFormData);
-    setMemberFormData(INITIAL_FORM_STATE);
-    navigate("/mycircle");
+    try {
+      addMember(memberFormData);
+      setMemberFormData(INITIAL_FORM_STATE);
+      navigate("/mycircle");
+    } catch (error) {
+      console.log(e);
+      throw new Error("whoops! something went wrong");
+    }
   };
 
   const handleCancel = (e) => {
