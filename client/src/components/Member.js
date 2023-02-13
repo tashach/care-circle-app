@@ -67,7 +67,7 @@ const Member = ({
         <div>
           <Button
             size="sm"
-            variant="info"
+            variant="warning"
             onClick={() => setIsHidden(!isHidden)}
           >
             Edit
@@ -82,9 +82,11 @@ const Member = ({
           </Button>
         </div>
       </Card.Title>
-      <Card.Body>
-        <blockquote className="blockquote mb-0" style={{ marginLeft: 10 }}>
-          <p style={{ color: "black", fontSize: 18 }}>{email}</p>
+      <Card.Body className="m-10">
+        <blockquote className="blockquote mb-0">
+          <p className="text-secondary" style={{ fontSize: 18 }}>
+            {email}
+          </p>
           <footer
             style={{ fontSize: 16 }}
             id="blockquote-footer"

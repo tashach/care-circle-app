@@ -1,5 +1,5 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { propTypes } from "react-bootstrap/esm/Image";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import "../styles/Header.css";
 
@@ -34,5 +34,5 @@ const GuestHeader = ({ logout }) => {
 export default GuestHeader;
 
 GuestHeader.propTypes = {
-  logout: propTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 };
