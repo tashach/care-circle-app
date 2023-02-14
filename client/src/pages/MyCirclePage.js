@@ -5,12 +5,13 @@ import { Button } from "react-bootstrap";
 import Member from "../components/Member";
 import Header from "../components/Header";
 import "../styles/TaskList.css";
-// import { useEffect, useState } from "react";
+import { useAppContext } from "../context/AppContext";
 
 const MyCirclePage = ({ deleteMember, editMember, memberData, logout }) => {
   console.log(memberData);
+  const { user } = useAppContext();
 
-  const memberComponents = memberData?.map((member) => {
+  const memberComponents = user.circle?.map((member) => {
     return (
       <li key={member._id}>
         <Member

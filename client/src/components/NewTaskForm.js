@@ -1,8 +1,9 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Row, Col, Button } from "react-bootstrap";
+import AlertItem from "../components/AlertItem";
+import { useAppContext } from "../context/AppContext";
 
 const INITIAL_FORM_STATE = {
   title: "",
@@ -11,9 +12,10 @@ const INITIAL_FORM_STATE = {
   date: "",
 };
 
-const NewTaskForm = ({ addTask }) => {
+const NewTaskForm = () => {
   const navigate = useNavigate();
   const [taskFormData, setTaskFormData] = useState(INITIAL_FORM_STATE);
+  const { displayAlert, showAlert, addTask } = useAppContext();
 
   const handleChange = (e) => {
     console.log("Handle Change Called");
@@ -25,25 +27,29 @@ const NewTaskForm = ({ addTask }) => {
     setTaskFormData(newTaskData);
   };
 
-  const handleCancel = (e) => {
+  const handleCancel = () => {
     setTaskFormData(INITIAL_FORM_STATE);
     navigate("/mytasks");
   };
 
   const handleNewTaskSubmit = (e) => {
-    if (taskFormData.title === "") {
-      console.log("missing required information");
-    } else {
-      e.preventDefault();
-      console.log("Calling form submit");
-      addTask(taskFormData);
-      setTaskFormData(INITIAL_FORM_STATE);
-      navigate("/mytasks");
+    e.preventDefault();
+    console.log("calling addTask");
+    if (!taskFormData.title) {
+      displayAlert();
+      return;
     }
+    addTask(taskFormData);
+    setTaskFormData(INITIAL_FORM_STATE);
+    setTimeout(() => {
+      navigate("/mytasks");
+    }, 2000);
   };
+
   return (
     <div className={`addTaskContainer w-75`}>
       <Form>
+        {showAlert && <AlertItem />}
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="title">
@@ -107,10 +113,6 @@ const NewTaskForm = ({ addTask }) => {
       </Form>
     </div>
   );
-};
-
-NewTaskForm.propTypes = {
-  addTask: PropTypes.func.isRequired,
 };
 
 export default NewTaskForm;

@@ -4,7 +4,7 @@ import "../styles/Mainscreen.css";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AlertItem from "../components/AlertItem";
 import { useAppContext } from "../context/AppContext";
 
@@ -12,10 +12,11 @@ const INITIAL_FORM_STATE = {
   email: "",
   password: "",
 };
-const Login = ({ loginUser }) => {
-  const [values, setValues] = useState(INITIAL_FORM_STATE);
 
-  const { isLoading, showAlert, displayAlert } = useAppContext();
+const Login = () => {
+  const navigate = useNavigate();
+  const [values, setValues] = useState(INITIAL_FORM_STATE);
+  const { user, isLoading, showAlert, displayAlert, login } = useAppContext();
 
   const handleChange = (e) => {
     console.log("Handle Change Called");
@@ -25,7 +26,6 @@ const Login = ({ loginUser }) => {
     };
     setValues(newFormData);
   };
-  const navigate = useNavigate();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -35,17 +35,17 @@ const Login = ({ loginUser }) => {
       displayAlert();
       return;
     }
-    console.log(values);
-
-    try {
-      const config = { headers: { "Content-type": "application/json" } };
-      loginUser(email, password, config);
-      navigate("/mytasks");
-    } catch (error) {
-      console.log(e);
-      throw new Error("whoops! something went wrong");
-    }
+    const currentUser = { email, password };
+    login(currentUser);
   };
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate("/mytasks");
+      }, 3000);
+    }
+  }, [user, navigate]);
 
   return (
     <div>

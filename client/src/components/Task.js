@@ -3,17 +3,10 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import "../styles/Task.css";
 import { Button, Card, Row, Col, Form } from "react-bootstrap";
+import { useAppContext } from "../context/AppContext";
+import AlertItem from "../components/AlertItem";
 
-const Task = ({
-  _id,
-  title,
-  description,
-  volunteerName,
-  date,
-  isComplete,
-  deleteTask,
-  editTask,
-}) => {
+const Task = ({ _id, title, description, volunteerName, date, isComplete }) => {
   const INITIAL_FORM_STATE = {
     _id: _id,
     title: title,
@@ -25,6 +18,7 @@ const Task = ({
   const [taskFormData, setTaskFormData] = useState(INITIAL_FORM_STATE);
   const [isHidden, setIsHidden] = useState(true);
   const displayClass = isHidden === true ? "hidden" : "show";
+  const { displayAlert, showAlert, deleteTask, editTask } = useAppContext();
 
   const handleChange = (e) => {
     console.log("Handle Change Called");
@@ -33,7 +27,6 @@ const Task = ({
       ...taskFormData,
       [e.target.name]: value,
     };
-    console.log(newTaskData);
     setTaskFormData(newTaskData);
   };
 
@@ -56,6 +49,10 @@ const Task = ({
   const handleDiscardChanges = () => {
     setIsHidden(true);
     setTaskFormData(INITIAL_FORM_STATE);
+  };
+
+  const handleDelete = () => {
+    deleteTask(_id);
   };
 
   return (
@@ -187,13 +184,14 @@ const Task = ({
             </Button>
             <Button
               size="sm"
-              onClick={() => deleteTask(_id)}
+              onClick={handleDelete}
               variant="danger"
               className="mx-2"
             >
               Delete
             </Button>
           </div>
+          {showAlert && <AlertItem />}
         </Form>
       </div>
     </Card>
@@ -209,5 +207,4 @@ Task.propTypes = {
   volunteerName: PropTypes.string,
   date: PropTypes.string,
   isComplete: PropTypes.bool.isRequired,
-  deleteTask: PropTypes.func.isRequired,
 };

@@ -67,12 +67,12 @@ exports.postCreateUser = asyncHandler(async (req, res) => {
 });
 
 exports.login = asyncHandler(async (req, res) => {
-  console.log("request body", req.body);
+  // console.log("request body", req.body);
   const { email, password } = req.body;
   const user = await User.findOne({ email: email });
   if (user && (await user.matchPassword(password))) {
     const token = generateToken(user._id);
-    res.json({
+    res.status(200).json({
       _id: user._id.toString(),
       firstName: user.firstName,
       lastName: user.lastName,
@@ -110,7 +110,7 @@ exports.deleteUser = (req, res) => {
 exports.addTask = (req, res) => {
   const newTask = new Task(req.body);
   newTask.save();
-
+  const user = User.findById(req.params.id);
   User.findByIdAndUpdate(
     req.params.id,
     { $push: { tasks: newTask } },
@@ -119,11 +119,7 @@ exports.addTask = (req, res) => {
       if (err) {
         res.status(400).json({ message: "error" });
       }
-
-      res.json({
-        message: `successfully added task ${newTask.title}`,
-        _id: newTask._id,
-      });
+      res.status(201).json(newTask);
     }
   );
 };

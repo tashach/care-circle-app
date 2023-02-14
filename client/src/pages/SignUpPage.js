@@ -4,9 +4,8 @@ import PublicHeader from "../components/PublicHeader";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AlertItem from "../components/AlertItem";
-import PropTypes from "prop-types";
 import { useAppContext } from "../context/AppContext";
 
 const INITIAL_FORM_STATE = {
@@ -16,11 +15,11 @@ const INITIAL_FORM_STATE = {
   password: "",
   confirmPassword: "",
 };
-const SignUpPage = ({ createUser }) => {
-  const [values, setValues] = useState(INITIAL_FORM_STATE);
-
-  const { isLoading, showAlert, displayAlert } = useAppContext();
+const SignUpPage = () => {
   const navigate = useNavigate();
+  const [values, setValues] = useState(INITIAL_FORM_STATE);
+  const { user, isLoading, showAlert, displayAlert, registerUser } =
+    useAppContext();
 
   const handleChange = (e) => {
     console.log("Handle Change Called");
@@ -45,16 +44,17 @@ const SignUpPage = ({ createUser }) => {
       displayAlert();
       return;
     }
-    const config = { headers: { "Content-type": "application/json" } };
-    createUser(
-      values.firstName,
-      values.lastName,
-      values.email,
-      values.password,
-      config
-    );
-    navigate("/addtask");
+    const currentUser = { email, password, firstName, lastName };
+    registerUser(currentUser);
   };
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate("/addTask");
+      }, 3000);
+    }
+  }, [user, navigate]);
 
   return (
     <div>
@@ -131,7 +131,7 @@ const SignUpPage = ({ createUser }) => {
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" disabled={isLoading}>
               Create Account
             </Button>
           </Form>
@@ -147,7 +147,3 @@ const SignUpPage = ({ createUser }) => {
 };
 
 export default SignUpPage;
-
-SignUpPage.propTypes = {
-  createUser: PropTypes.func.isRequired,
-};

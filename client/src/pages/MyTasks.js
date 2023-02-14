@@ -6,16 +6,15 @@ import { Button, Form } from "react-bootstrap";
 import Task from "../components/Task";
 import CompletedTask from "../components/CompletedTask";
 import Header from "../components/Header";
-
+import { useAppContext } from "../context/AppContext";
 import "../styles/TaskList.css";
 
-const MyTasks = ({ deleteTask, editTask, taskData, userName, logout }) => {
-  console.log(taskData);
-
+const MyTasks = ({ editTask }) => {
   const [isHidden, setIsHidden] = useState(true);
   const displayClass = isHidden === true ? "hidden" : "show";
+  const { user, tasks } = useAppContext();
 
-  const taskComponents = taskData?.map((task) => {
+  const taskComponents = tasks?.map((task) => {
     if (!task.isComplete) {
       return (
         <li key={task._id}>
@@ -26,7 +25,6 @@ const MyTasks = ({ deleteTask, editTask, taskData, userName, logout }) => {
             volunteerName={task.volunteerName}
             date={task.date}
             isComplete={task.isComplete}
-            deleteTask={deleteTask}
             editTask={editTask}
           />
         </li>
@@ -34,7 +32,7 @@ const MyTasks = ({ deleteTask, editTask, taskData, userName, logout }) => {
     }
   });
 
-  const completedTaskComponents = taskData?.map((task) => {
+  const completedTaskComponents = tasks?.map((task) => {
     if (task.isComplete) {
       return (
         <li key={task._id}>
@@ -44,7 +42,6 @@ const MyTasks = ({ deleteTask, editTask, taskData, userName, logout }) => {
             description={task.description}
             volunteerName={task.volunteerName}
             isComplete={task.isComplete}
-            deleteTask={deleteTask}
             editTask={editTask}
           />
         </li>
@@ -53,8 +50,8 @@ const MyTasks = ({ deleteTask, editTask, taskData, userName, logout }) => {
   });
   return (
     <div>
-      <Header logout={logout} />
-      <Mainscreen title={`Welcome Back, ${userName}!`}>
+      <Header />
+      <Mainscreen title={`Welcome Back, ${user.firstName}!`}>
         <Link to="/addtask">
           <Button
             variant="info"

@@ -10,8 +10,6 @@ const GuestViewPage = ({ taskData, userName, editTask, logout }) => {
   console.log(taskData);
 
   const [isHidden, setIsHidden] = useState(false);
-  const [message, setMessage] = useState("");
-
   const displayClass = isHidden === false ? "hidden" : "show";
 
   const taskComponents = taskData?.map((task) => {

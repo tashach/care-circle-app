@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 // const errorHandlerMiddleWare = require("./middleware/error-handler");
 const app = express();
 const user = require("./routes/user");
+const morgan = require("morgan");
 
 // db and authenticateUser
 connectDB();
@@ -15,6 +16,9 @@ app.use(cors({ origin: true, credentials: true }));
 
 //middleware
 
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("dev"));
+}
 // this allows json data to be available
 app.use(express.json({ extended: false }));
 // app.get("/", (req, res) => res.send("Server up and running"));

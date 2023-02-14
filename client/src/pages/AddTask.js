@@ -2,12 +2,12 @@ import NewTaskForm from "../components/NewTaskForm";
 import Mainscreen from "../components/Mainscreen";
 import Header from "../components/Header";
 
-const AddTask = ({ addTask, logout }) => {
+const AddTask = () => {
   return (
     <div>
-      <Header logout={logout}></Header>
+      <Header />
       <Mainscreen title="I could use help with...">
-        <NewTaskForm addTask={addTask}></NewTaskForm>
+        <NewTaskForm></NewTaskForm>
       </Mainscreen>
     </div>
   );

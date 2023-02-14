@@ -29,6 +29,7 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.0",
+    "morgan": "^1.10.0",
     "node": "^18.13.0",
     "react-router-dom": "^6.8.0"
   },

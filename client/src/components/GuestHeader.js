@@ -1,15 +1,17 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
 import "../styles/Header.css";
 
-const GuestHeader = ({ logout }) => {
+const GuestHeader = () => {
   const navigate = useNavigate();
+  const { logoutUser } = useAppContext();
 
   const handleLogout = (e) => {
     e.preventDefault();
     console.log("calling handleLogout");
-    logout();
+    logoutUser();
     navigate("/");
   };
   return (

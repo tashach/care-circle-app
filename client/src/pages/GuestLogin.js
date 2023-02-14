@@ -40,7 +40,6 @@ const GuestLogin = ({ loginMember }) => {
       loginMember(email, inviteCode, config);
       navigate("/guestview");
     } catch (error) {
-      console.log(e);
       throw new Error("whoops! something went wrong");
     }
   };

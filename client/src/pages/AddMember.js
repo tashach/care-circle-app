@@ -1,15 +1,17 @@
 import Mainscreen from "../components/Mainscreen";
 import NewMemberForm from "../components/NewMemberForm";
 import Header from "../components/Header";
+import { useAppContext } from "../context/AppContext";
 
-const AddMember = ({ addMember, logout, inviteCode }) => {
+const AddMember = ({ addMember }) => {
+  const { user } = useAppContext();
   return (
     <div>
-      <Header logout={logout} />
+      <Header />
       <Mainscreen title="Add to My Circle">
         <NewMemberForm
           addMember={addMember}
-          inviteCode={inviteCode}
+          inviteCode={user.inviteCode}
         ></NewMemberForm>
       </Mainscreen>
     </div>

@@ -50,14 +50,6 @@ const UserSchema = new mongoose.Schema(
 //   return await bcrypt.compare(enteredPassword, this.password);
 // };
 
-// UserSchema.methods.matchPassword = async function (enteredPassword) {
-//   return enteredPassword === this.password;
-// };
-
-// UserSchema.methods.matchInviteCode = async function (enteredCode) {
-//   return enteredCode === this.inviteCode;
-// };
-
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
