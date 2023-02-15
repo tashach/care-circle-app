@@ -14,6 +14,9 @@ The main user can create an account, add tasks or action items, and invite frien
 ### Circle Member
 Members who have been invited to join a circle can view and sign up for items that the main user has posted. 
 
+<img width="1429" alt="Screenshot 2023-02-14 at 5 04 51 PM" src="https://user-images.githubusercontent.com/95459886/218899499-df5e87ca-f20b-4c91-becd-33ff4b0f3700.png">
+
+
 ## Dependencies and Installation
 Care Circle relies on: 
 - Node.js
