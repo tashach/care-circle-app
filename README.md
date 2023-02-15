@@ -1,22 +1,36 @@
 # Care Circle
 
-Care Circle is a project I created as my Capstone for Ada Developer's Academy. I decided to use a MERN stack to challenge myself to learn some new technologies. It's been a lot of fun! 
+Care Circle is a project I created as my Capstone for Ada Developer's Academy. The purpose of the project is to let your community know how they can support you during times of need - after a surgery, childbirth, or illness. 
 
-Have you ever wondered how you can help a loved one who has recently had undergone a surgery, given birth, or is mourning a loss? 
+Care Circle reduces the mental load for the user to remember who has offered to help and with what, and members of the user's circle can volunteer for tasks without needing to contact the user directly.
 
-Care Circle provides a way to communicate to your loved ones about ways that they can support you or someone else during times of need. It reduces the mental load for the user to remember who has offered to help you and with what. Members of the user's circle can volunteer for tasks without needing to contact the user directly.
+## Feature Set
+### User
 
-## Installation
+The main user can create an account, add tasks or action items, and invite friends/family to their Care Circle
+
+### Circle Member
+Members who have been invited to join a circle can view and sign up for items that the main user has posted. 
+
+## Dependencies and Installation
+Care Circle relies on: 
+- Node.js
+- Express.js
+- Nodemon
+- React
+- MongoDB
 
 Use the package manager [npm](https://pip.pypa.io/en/stable/) to install dependencies for Care Circle.
 
 ```bash
 npm install
 ```
-
-## Usage
-
-Users can create an account for themselves or someone else. To get started, add tasks or items that you could use a hand with. Invite friends/family to your circle and they will be able to view and sign up for tasks! 
+### Setup
+Users will need to 
+```bash
+npx create-react app
+npm start
+```
 
 ## Future Improvements
 - Calendar view of upcoming tasks
