@@ -20,17 +20,15 @@ Care Circle relies on:
 - React
 - MongoDB
 
+Additionally, users will need a MongoDb Atlas account, and setup a connection string in their `.env` file. 
+
 Use the package manager [npm](https://pip.pypa.io/en/stable/) to install dependencies for Care Circle.
 
 ```bash
 npm install
 ```
-### Setup
-Users will need to 
-```bash
-npx create-react app
-npm start
-```
+### Setup React App
+Create a client folder and run `npx create-react-app`, then `npm start` to start the server. Visit `localhost:3000` to view in a browser.  
 
 ## Future Improvements
 - Calendar view of upcoming tasks
