@@ -29,7 +29,7 @@ npm run install-dependencies
 Additionally, users will need a MongoDb Atlas account, and setup values for `MONGO_URI`, `NOVE_ENV`, and `JWT_SECRET` in their `.env` file. 
 
 ```bash
-npm run install-dependencies
+npm start
 ```
 #### Setup React App
 
