@@ -9,6 +9,8 @@ Care Circle reduces the mental load for the user to remember who has offered to 
 
 The main user can create an account, add tasks or action items, and invite friends/family to their Care Circle
 
+<img width="1430" alt="Screenshot 2023-02-14 at 5 04 19 PM" src="https://user-images.githubusercontent.com/95459886/218899391-9b2981a6-fde8-4e08-aa68-8918af070311.png">
+
 ### Circle Member
 Members who have been invited to join a circle can view and sign up for items that the main user has posted. 
 
