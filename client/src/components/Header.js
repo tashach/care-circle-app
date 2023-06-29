@@ -21,6 +21,9 @@ const Header = ({ logout }) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
           <Nav className="mr-10">
+            <Nav.Link className="navLink" href="/about">
+              About
+            </Nav.Link>
             <Nav.Link className="navLink" href="/mytasks">
               My Items
             </Nav.Link>

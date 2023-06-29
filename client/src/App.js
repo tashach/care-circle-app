@@ -16,6 +16,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
+import AboutPage from "./pages/About";
 
 function App() {
   const [userData, setUserData] = useState({});
@@ -262,6 +263,7 @@ function App() {
             path="/guestlogin"
             element={<GuestLogin loginMember={loginMember} />}
           />
+          <Route path="/about" element={<AboutPage />} />
           <Route
             path="/mytasks"
             element={
